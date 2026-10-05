@@ -1,0 +1,26 @@
+/* The molecule palette connects the brand, navigation and answer states. */
+:root{--ink:#263343;--navy:#263343;--paper:#f7f9fc;--line:#e1e7ee;--muted:#657183;--select:#326bc4;--select-bg:#eaf2ff;--green:#327a4d;--red:#b5444b;--lime:#dcefe0;--action:#dcefe0}
+.brand{width:auto;height:48px;overflow:visible;justify-self:start;gap:7px;flex-shrink:0;font-size:30px;font-weight:650;letter-spacing:-1.2px}
+.brand-mark{display:block;width:48px;height:48px;object-fit:contain}
+.brand-name{line-height:1}
+.github-link,.topbar .header-actions .icon-button{background:transparent;border-color:transparent;color:var(--muted)}
+.github-link:hover,.topbar .header-actions .icon-button:hover{background:#eaf0f8;color:var(--ink)}
+.bottom-nav{background:transparent;border:0;box-shadow:none;gap:4px}
+.bottom-nav button{color:var(--muted);border-radius:11px;transition:background .15s,color .15s}
+.bottom-nav button:hover:not(.active){background:#edf2f8;color:var(--ink)}
+.bottom-nav button.active{background:var(--select-bg);color:var(--select);box-shadow:none}
+.button:not(.secondary):not(:disabled){background:var(--select);color:white}
+.button:not(.secondary):not(:disabled):hover{background:#285aaa}
+.primary-action{box-shadow:0 4px 12px #326bc41a}
+.mode.selected{background:var(--select-bg);border-color:#8badde;color:#285b9e}
+.step{background:#edf2f8;color:#52657c}
+.context-panel{background:#eff3f8}
+.bar span{background:var(--select)}
+.answer.correct{border-color:#66a879;background:#edf7ef;color:#27683e}
+.answer.wrong{border-color:#dc8186;background:#fff0f1;color:#a33940}
+.feedback{border-left-color:#66a879}.feedback strong{color:#27683e}
+.feedback.bad{border-left-color:#dc8186}.feedback.bad strong{color:#a33940}
+@media(min-width:701px){.topbar{min-height:96px}.bottom-nav{padding:6px}body>nav.bottom-nav{top:24px}.bottom-nav button.active{background:var(--select-bg);color:var(--select)}.bottom-nav button{padding:9px 13px}}
+@media(min-width:701px) and (max-width:900px){.brand{font-size:26px;gap:5px}.brand-mark{width:40px;height:40px}.bottom-nav button{padding:9px 10px}}
+@media(max-width:700px){.topbar{padding:12px 18px}.brand{font-size:29px;gap:5px}.brand-mark{width:44px;height:44px}.bottom-nav{background:#ffffffed;border-top:1px solid var(--line);border-radius:18px 18px 0 0;box-shadow:0 -4px 22px #26334308;backdrop-filter:blur(12px)}.bottom-nav button.active{background:var(--select-bg);color:var(--select)}}
+@media(prefers-reduced-motion:reduce){.bottom-nav button{transition:none}}
