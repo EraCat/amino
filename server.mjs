@@ -44,7 +44,7 @@ function leaderboard(next){
       const list=attempts.filter(a=>a.topic===t.id),finished=list.filter(a=>a.status==='passed'||a.status==='failed');
       const best=finished.sort((a,b)=>Core.resultScore(b)-Core.resultScore(a)||(a.status==='passed'?0:1)-(b.status==='passed'?0:1)||a.startedAt-b.startedAt)[0];
       const latest=list.sort((a,b)=>b.startedAt-a.startedAt)[0];
-      return [t.id,{best:best?expose(best):null,latest:latest?expose(latest):null}];
+      return [t.id,{best:best?expose(best):null,latest:latest?expose(latest):null,passed:list.some(a=>a.status==='passed')}];
     }));
     return {id:p.id,name:p.name,results,total:Object.values(results).reduce((sum,r)=>sum+(r.best?.score||0),0),attemptCount:attempts.length};
   }).sort((a,b)=>b.total-a.total||a.name.localeCompare(b.name,'ru')||a.id.localeCompare(b.id));
@@ -103,7 +103,7 @@ const server=http.createServer(async(req,res)=>{
             const q=a.questions[a.cursor];if(input.choice<0||input.choice>=q.choices.length)fail('Вариант ответа не найден');
             const selected=q.choices[input.choice],correct=selected===q.correct;
             if(correct)a.score++;else a.errors++;a.cursor++;
-            if(a.errors>=Core.MAX_ERRORS){a.status='failed';a.score=0;}else if(a.cursor===a.questions.length)a.status='passed';
+            if(a.errors>=Core.MAX_ERRORS)a.status='failed';else if(a.cursor===a.questions.length)a.status='passed';
             if(a.status!=='running')a.finishedAt=Date.now();
             const feedback={right:correct,selected,correct:q.correct,explanation:q.explanation};a.answers.push({choice:input.choice,feedback});changed=true;reply={attempt:live(a),feedback};
           }

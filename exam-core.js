@@ -1,6 +1,6 @@
 /* Shared questions for practice and exams. One correct answer = one point. */
 var ExamCore = (() => {
-  const VERSION = '2026-10-v4';
+  const VERSION = '2026-10-v5';
   const LIMIT = 30;
   const MAX_ERRORS = 3;
   const GROUPS = {nonpolar:'Неполярная',polar:'Полярная незаряженная',acidic:'Кислая',basic:'Основная'};
@@ -72,8 +72,13 @@ var ExamCore = (() => {
     return shuffle(selected,random);
   }
   function publicQuestion(q,index){if(!q)return null;return {index,type:q.type,text:q.text,prompt:q.prompt,choices:q.choices};}
-  function resultScore(a){return ['running','passed'].includes(a.status)?a.score:0;}
-  function isCurrentAttempt(a){return ['2026-10-v3',VERSION].includes(a.version)&&TOPICS.some(t=>t.id===a.topic);}
+  function resultScore(a){
+    if(a.status==='unfinished')return 0;
+    // Recover earned points from attempts zeroed by the previous grading rule.
+    if(a.status==='failed'&&a.score===0&&Array.isArray(a.answers))return a.answers.filter(x=>x.feedback?.right===true).length;
+    return a.score;
+  }
+  function isCurrentAttempt(a){return ['2026-10-v3','2026-10-v4',VERSION].includes(a.version)&&TOPICS.some(t=>t.id===a.topic);}
   return {VERSION,LIMIT,MAX_ERRORS,TOPICS,question,allowed,build,publicQuestion,isCurrentAttempt,resultScore};
 })();
 if(typeof module!=='undefined'&&module.exports)module.exports=ExamCore;
