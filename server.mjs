@@ -57,8 +57,8 @@ async function body(req){
   try{const value=JSON.parse(Buffer.concat(parts).toString('utf8'));if(!value||typeof value!=='object'||Array.isArray(value))fail('Некорректный запрос');return value;}catch{fail('Некорректный запрос');}
 }
 function json(res,status,payload){res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(payload));}
-const statics=new Set(['index.html','style.css','flow.css','exam.css','app.js','data.js','exam-core.js','exam-ui.js']);
-const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml'};
+const statics=new Set(['index.html','style.css','flow.css','exam.css','app.js','data.js','exam-core.js','exam-ui.js','assets/logo.png','assets/favicon.png']);
+const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.png':'image/png'};
 const server=http.createServer(async(req,res)=>{
   try{
     const url=new URL(req.url,'http://localhost'),route=url.pathname;

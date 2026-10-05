@@ -49,3 +49,9 @@
 .github-link:hover{background:#e8edf5}
 
 .feedback{scroll-margin-bottom:110px}.answer-copy .pill{font-size:14px}.answer.correct .pill,.answer.wrong .pill{background:transparent;color:inherit;padding:0}
+
+/* Supplied wordmark; crop transparent padding in layout only. */
+.brand{position:relative;width:180px;height:40px;overflow:hidden;justify-self:start;flex-shrink:0}
+.brand-logo{position:absolute;width:200px;height:auto;max-width:none;left:-10px;top:-13px}
+@media(max-width:360px){.brand{width:156px;height:36px}.brand-logo{width:174px;left:-9px;top:-11px}}
+@media(min-width:701px) and (max-width:900px){.brand{width:156px;height:36px}.brand-logo{width:174px;left:-9px;top:-11px}}
