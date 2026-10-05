@@ -33,3 +33,4 @@
 
 /* Fixed icon slots keep letters and SVG marks aligned on narrow screens. */
 .mode{min-width:0}.mode-symbol{display:flex;align-items:center;justify-content:center;width:24px;height:24px;flex:0 0 24px;line-height:1}.mode-symbol svg{display:block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}.codon-symbol{font-size:10px;font-weight:750;letter-spacing:-.35px}.formula-symbol{font-size:18px;font-weight:600;letter-spacing:0}.formula-symbol sub{font-size:11px;vertical-align:baseline;position:relative;top:3px}.properties-symbol{font-size:24px;font-weight:500}
+.mode>span:nth-child(2){min-width:0;overflow-wrap:anywhere}
