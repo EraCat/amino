@@ -1,6 +1,6 @@
 /* Shared questions for practice and exams. One correct answer = one point. */
 var ExamCore = (() => {
-  const VERSION = '2026-10-v5';
+  const VERSION = '2026-10-v6';
   const LIMIT = 30;
   const MAX_ERRORS = 3;
   const GROUPS = {nonpolar:'Неполярная',polar:'Полярная незаряженная',acidic:'Кислая',basic:'Основная'};
@@ -10,6 +10,7 @@ var ExamCore = (() => {
   ];
   const TOPICS = [
     {id:'names-codes',title:'Названия и коды',forward:['code','three'],reverse:['name','name-three'],description:'Названия по кодам и коды по названиям'},
+    {id:'codons',title:'Генетический код',forward:['codon'],reverse:['codon-reverse'],description:'Кодоны мРНК и аминокислоты в стандартном генетическом коде'},
     {id:'classification',title:'Классификация',forward:['classset'],reverse:['classset-reverse'],description:'Аминокислоты и группы боковых цепей'},
     {id:'formulas',title:'Формулы',forward:['formula'],reverse:['formula-reverse'],description:'Аминокислоты и молекулярные формулы'},
     {id:'structures',title:'Структуры',forward:['structure-reverse'],reverse:['structure'],description:'Аминокислоты и химические структуры'},
@@ -38,8 +39,27 @@ var ExamCore = (() => {
     essential:{text:'Эта аминокислота незаменима для здорового взрослого?',prompt:a=>a.name,value:essential},
     'essential-reverse':{text:'Какая из перечисленных аминокислот относится к этой категории для здорового взрослого?',prompt:essential,value:a=>a.name,match:essential}
   };
-  function allowed(a,type){return a.group!=='special'||!['classset','classset-reverse','essential','essential-reverse'].includes(type);}
-  function question(data,a,type,random=Math.random){
+  function allowed(a,type){
+    if(['codon','codon-reverse'].includes(type))return a.group!=='special'&&Array.isArray(a.codons)&&a.codons.length>0;
+    return a.group!=='special'||!['classset','classset-reverse','essential','essential-reverse'].includes(type);
+  }
+  // forcedCodon permits exhaustive inspection of every synonymous codon.
+  function codonQuestion(data,a,type,random,forcedCodon){
+    if(!allowed(a,type))throw Error('Недопустимый тип вопроса');
+    const codon=forcedCodon===undefined?a.codons[Math.floor(random()*a.codons.length)]:forcedCodon;
+    if(!a.codons.includes(codon))throw Error('Кодон не относится к этой аминокислоте');
+    const others=data.filter(other=>allowed(other,type)&&other.code!==a.code);
+    const reverse=type==='codon-reverse',correct=reverse?a.name:codon;
+    const candidates=reverse?others.map(other=>other.name):others.flatMap(other=>other.codons).filter(c=>!a.codons.includes(c));
+    const alternatives=shuffle([...new Set(candidates)].filter(c=>c!==correct),random).slice(0,3);
+    if(alternatives.length!==3)throw Error('Недостаточно вариантов ответа');
+    return {code:a.code,type,
+      text:reverse?'Какую аминокислоту кодирует этот кодон?':'Какой из этих кодонов соответствует аминокислоте?',
+      prompt:reverse?codon:a.name,choices:shuffle([correct,...alternatives],random),correct,
+      explanation:`${a.name}: ${a.codons.join(', ')}.`};
+  }
+  function question(data,a,type,random=Math.random,forcedCodon){
+    if(['codon','codon-reverse'].includes(type))return codonQuestion(data,a,type,random,forcedCodon);
     const spec=SPECS[type];if(!spec||!allowed(a,type))throw Error('Недопустимый тип вопроса');
     const correct=spec.value(a);
     const candidates=data.filter(other=>allowed(other,type)&&(!spec.match||spec.match(other)!==spec.match(a)));
@@ -78,7 +98,7 @@ var ExamCore = (() => {
     if(a.status==='failed'&&a.score===0&&Array.isArray(a.answers))return a.answers.filter(x=>x.feedback?.right===true).length;
     return a.score;
   }
-  function isCurrentAttempt(a){return ['2026-10-v3','2026-10-v4',VERSION].includes(a.version)&&TOPICS.some(t=>t.id===a.topic);}
+  function isCurrentAttempt(a){return ['2026-10-v3','2026-10-v4','2026-10-v5',VERSION].includes(a.version)&&TOPICS.some(t=>t.id===a.topic);}
   return {VERSION,LIMIT,MAX_ERRORS,TOPICS,question,allowed,build,publicQuestion,isCurrentAttempt,resultScore};
 })();
 if(typeof module!=='undefined'&&module.exports)module.exports=ExamCore;
