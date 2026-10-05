@@ -1,0 +1,11 @@
+private-data/
+*.tmp
+.env
+.env.*
+!.env.example
+node_modules/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
