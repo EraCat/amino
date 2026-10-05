@@ -24,3 +24,7 @@
 @media(min-width:701px) and (max-width:900px){.brand{font-size:26px;gap:5px}.brand-mark{width:40px;height:40px}.bottom-nav button{padding:9px 10px}}
 @media(max-width:700px){.topbar{padding:12px 18px}.brand{font-size:29px;gap:5px}.brand-mark{width:44px;height:44px}.bottom-nav{background:#ffffffed;border-top:1px solid var(--line);border-radius:18px 18px 0 0;box-shadow:0 -4px 22px #26334308;backdrop-filter:blur(12px)}.bottom-nav button.active{background:var(--select-bg);color:var(--select)}}
 @media(prefers-reduced-motion:reduce){.bottom-nav button{transition:none}}
+
+/* Navigation icons approved in the preview. */
+.nav-icon{display:block;width:24px;height:24px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+@media(min-width:701px) and (max-width:1050px){.topbar{margin-bottom:64px}body>nav.bottom-nav{top:92px;left:50%;right:auto;transform:translateX(-50%)}.bottom-nav button{padding:9px 12px;gap:8px}}
