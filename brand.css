@@ -28,3 +28,5 @@
 /* Navigation icons approved in the preview. */
 .nav-icon{display:block;width:24px;height:24px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 @media(min-width:701px) and (max-width:1050px){.topbar{margin-bottom:64px}body>nav.bottom-nav{top:92px;left:50%;right:auto;transform:translateX(-50%)}.bottom-nav button{padding:9px 12px;gap:8px}}
+
+.set-row{align-items:stretch;flex-direction:column;gap:12px}.set-segments{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:12px;background:#eff3f8}.set-segments button{flex:1;min-width:0;min-height:44px;padding:9px 8px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:14px;font-weight:600}.set-segments button[aria-pressed="true"]{background:white;color:var(--select);box-shadow:0 1px 4px #26334314}.set-segments button:hover:not([aria-pressed="true"]){background:#e5edf7}
