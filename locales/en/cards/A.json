@@ -1,0 +1,14 @@
+{
+  "code": "A",
+  "sourceRevision": 1,
+  "name": "Alanine",
+  "info": "A small, nonpolar methyl side chain.",
+  "feature": "Methyl side chain",
+  "history": {
+    "clue": "The name is connected with the aldehyde used in its chemical synthesis.",
+    "story": "In 1850, Adolph Strecker synthesized alanine using acetaldehyde, ammonia, and hydrocyanic acid. The amino acid's name is linked to the starting aldehyde. This experiment marked the beginning of the Strecker synthesis, a method for producing amino acids from relatively simple compounds."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Alanine"
+  }
+}

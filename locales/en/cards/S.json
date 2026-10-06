@@ -1,0 +1,14 @@
+{
+  "code": "S",
+  "sourceRevision": 1,
+  "name": "Serine",
+  "info": "The hydroxyl group forms hydrogen bonds and can be phosphorylated.",
+  "feature": "Hydroxyl group",
+  "history": {
+    "clue": "The name comes from the Latin word for “silk.”",
+    "story": "In 1865, Emil Cramer first obtained serine from silk protein. This is the origin of the name: the Latin sericum means “silk.” The source from which it was isolated became the name of an amino acid that is also found in many other proteins."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Serine"
+  }
+}

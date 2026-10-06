@@ -1,0 +1,14 @@
+{
+  "code": "L",
+  "sourceRevision": 1,
+  "name": "Leucine",
+  "info": "A hydrophobic BCAA. It differs from isoleucine in the position of the branch.",
+  "feature": "Branched chain",
+  "history": {
+    "clue": "The name comes from the Greek word for “white,” after the appearance of its crystals.",
+    "story": "In 1820, Henri Braconnot isolated white crystals while breaking down muscle tissue and named the substance leucine: leukos means “white” in Greek. A year earlier, Proust had obtained the same substance while studying cheese, but gave it a different name. It was not until 1839 that the two were shown to be the same compound."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Leucine"
+  }
+}

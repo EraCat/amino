@@ -1,0 +1,14 @@
+{
+  "code": "G",
+  "sourceRevision": 1,
+  "name": "Glycine",
+  "info": "The only standard amino acid without a chiral center. Its small side chain gives the chain flexibility.",
+  "feature": "Achiral",
+  "history": {
+    "clue": "The name comes from the Greek word for “sweet.”",
+    "story": "In 1820, Henri Braconnot obtained glycine by breaking down gelatin. The name comes from the Greek glykys, meaning “sweet,” after the taste of its crystals. Almost two centuries later, the Rosetta spacecraft detected glycine in the gas-and-dust envelope of comet Churyumov–Gerasimenko; the results were published in 2016."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Glycine"
+  }
+}

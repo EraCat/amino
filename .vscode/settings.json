@@ -1,0 +1,20 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["/locales/*/cards/*.json"],
+      "url": "./schemas/card.schema.json"
+    },
+    {
+      "fileMatch": ["/locales/*/ui.json"],
+      "url": "./schemas/ui.schema.json"
+    },
+    {
+      "fileMatch": ["/locales/*/questions.json"],
+      "url": "./schemas/questions.schema.json"
+    },
+    {
+      "fileMatch": ["/locales/*/errors.json"],
+      "url": "./schemas/errors.schema.json"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "code": "H",
+  "sourceRevision": 1,
+  "name": "Histidine",
+  "info": "A basic amino acid. At a pH of about 7, the imidazole group is predominantly neutral; its pKa is about 6, and its charge depends on the environment.",
+  "feature": "Imidazole ring",
+  "history": {
+    "clue": "The name contains the root histo-, associated with tissues.",
+    "story": "The root histo- is connected with the Greek histos, meaning “tissue, web,” as in the word “histology.” Histidine was independently isolated by Albrecht Kossel and Sven Gustaf Hedin in 1896. Kossel later received the Nobel Prize for research into the chemical composition of cells, including proteins and nucleic substances."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Histidine"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "code": "C",
+  "sourceRevision": 1,
+  "name": "Cysteine",
+  "info": "When oxidized, the thiol groups of two cysteines form a disulfide bridge. Its synthesis depends on methionine availability.",
+  "feature": "Thiol group; forms disulfide bridges when oxidized",
+  "history": {
+    "clue": "The name is derived from cystine, which was previously found in bladder stones.",
+    "story": "The story began in 1810, when William Wollaston discovered cystine in bladder stones. The Greek kystis, meaning “bladder,” gave the substance its name. In 1884, Eugen Baumann reduced cystine and obtained cysteine, preserving the link to the original compound in its name. When oxidized, two cysteine molecules can form cystine again."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Cysteine"
+  }
+}

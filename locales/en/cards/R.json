@@ -1,0 +1,14 @@
+{
+  "code": "R",
+  "sourceRevision": 1,
+  "name": "Arginine",
+  "info": "The guanidino group is predominantly positively charged at a pH of about 7. It is conditionally essential, especially during growth.",
+  "feature": "Guanidino group",
+  "history": {
+    "clue": "First isolated from lupin seedlings by Schulze and Steiger in 1886.",
+    "story": "In 1886, Ernst Schulze and Ernst Steiger isolated arginine from lupin seedlings. They studied nitrogen-containing substances in plants by precipitating and purifying their compounds. Lupin also helped reveal another amino acid: phenylalanine, described by Schulze and Barbieri in 1879."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Arginine"
+  }
+}

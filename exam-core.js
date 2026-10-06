@@ -1,86 +1,98 @@
-/* Shared questions for practice and exams. One correct answer = one point. */
+/* Shared semantic questions for practice and exams. Text is supplied by locale JSON. */
 var ExamCore = (() => {
-  const VERSION = '2026-10-v7';
+  const VERSION = '2026-10-v8';
   const LIMIT = 30;
   const MAX_ERRORS = 3;
-  const GROUPS = {nonpolar:'Неполярная',polar:'Полярная незаряженная',acidic:'Кислая',basic:'Основная'};
   const AXES = [
-    ['Ароматическое кольцо','FWYH'],['Гидрофобная алифатическая','AVLIM'],
-    ['Серосодержащая','CM'],['BCAA','VLI'],['Гидроксильная группа','STY'],['Амидная боковая цепь','NQ']
+    ['aromatic','FWYH'],['aliphatic','AVLIM'],['sulfur','CM'],
+    ['bcaa','VLI'],['hydroxyl','STY'],['amide','NQ']
   ];
   const TOPICS = [
-    {id:'names-codes',title:'Названия и коды',forward:['code','three'],reverse:['name','name-three'],description:'Названия по кодам и коды по названиям'},
-    {id:'codons',title:'Генетический код',forward:['codon'],reverse:['codon-reverse'],description:'Кодоны мРНК и аминокислоты в стандартном генетическом коде'},
-    {id:'classification',title:'Классификация',forward:['classset'],reverse:['classset-reverse'],description:'Аминокислоты и группы боковых цепей'},
-    {id:'formulas',title:'Формулы',forward:['formula'],reverse:['formula-reverse'],description:'Аминокислоты и молекулярные формулы'},
-    {id:'structures',title:'Структуры',forward:['structure-reverse'],reverse:['structure'],description:'Аминокислоты и химические структуры'},
-    {id:'properties',title:'Свойства',forward:['property-forward','essential'],reverse:['property','essential-reverse'],description:'Особенности и незаменимость'},
-    {id:'history',title:'История и этимология',forward:['history-forward'],reverse:['history'],description:'Происхождение названий и истории открытия'}
+    {id:'names-codes',forward:['code','three'],reverse:['name','name-three']},
+    {id:'codons',forward:['codon'],reverse:['codon-reverse']},
+    {id:'classification',forward:['classset'],reverse:['classset-reverse']},
+    {id:'formulas',forward:['formula'],reverse:['formula-reverse']},
+    {id:'structures',forward:['structure-reverse'],reverse:['structure']},
+    {id:'properties',forward:['property-forward','essential'],reverse:['property','essential-reverse']},
+    {id:'history',forward:['history-forward'],reverse:['history']}
   ].map(t=>({...t,types:[...t.forward,...t.reverse],total:LIMIT}));
   const shuffle = (a, random=Math.random) => {
     const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;
   };
-  const classification = a => [GROUPS[a.group],...AXES.filter(([,codes])=>codes.includes(a.code)).map(([title])=>title)].join(' · ');
-  const essential = a => a.essential?'Незаменимая':'Не входит в 9 незаменимых';
-  const property = a => `${a.feature}. Боковая цепь: ${a.side}.`;
-  const image = a => a.structure;
+  const format = (text,params={}) => text.replace(/\{(\w+)\}/g,(_,key)=>String(params[key]??''));
+  const dictionary = a => {if(!a._questions)throw Error('Missing question dictionary');return a._questions;};
+  const categories = a => [a.group,...AXES.filter(([,codes])=>codes.includes(a.code)).map(([key])=>key)];
+  const classificationId = a => 'classification:'+categories(a).slice().sort().join(',');
+  const classification = a => {const q=dictionary(a);return [q.groups[a.group],...categories(a).slice(1).map(key=>q.axes[key])].join(' · ');};
+  const essential = a => dictionary(a).essential[a.essential?'yes':'no'];
+  const property = a => format(dictionary(a).property,{feature:a.feature,side:a.side});
+  const aminoId = a => 'amino:'+a.code;
+  const propertyId = a => a.propertyId;
   const SPECS = {
-    history:{text:'О какой аминокислоте этот факт?',prompt:a=>a.history.clue,value:a=>a.name,match:a=>a.history.clue},
-    'history-forward':{text:'Какой факт относится к этой аминокислоте?',prompt:a=>a.name,value:a=>a.history.clue},
-    name:{text:'Какая аминокислота обозначается этим однобуквенным кодом?',prompt:a=>a.code,value:a=>a.name},
-    'name-three':{text:'Какая аминокислота обозначается этим трёхбуквенным кодом?',prompt:a=>a.three,value:a=>a.name},
-    code:{text:'Какой однобуквенный код у этой аминокислоты?',prompt:a=>a.name,value:a=>a.code},
-    three:{text:'Какой трёхбуквенный код у этой аминокислоты?',prompt:a=>a.name,value:a=>a.three},
-    classset:{text:'Какой набор категорий указан для этой аминокислоты в схеме квиза?',prompt:a=>a.name,value:classification},
-    'classset-reverse':{text:'Какая из перечисленных аминокислот имеет такой набор категорий в схеме квиза?',prompt:classification,value:a=>a.name,match:classification},
-    formula:{text:'Какая молекулярная формула у этой аминокислоты?',prompt:a=>a.name,value:a=>a.formula},
-    'formula-reverse':{text:'Какая из перечисленных аминокислот имеет эту молекулярную формулу?',prompt:a=>a.formula,value:a=>a.name,match:a=>a.formula},
-    structure:{text:'Какая аминокислота изображена?',prompt:image,value:a=>a.name},
-    'structure-reverse':{text:'Какая структура соответствует этой аминокислоте?',prompt:a=>a.name,value:image},
-    property:{text:'Какой аминокислоте соответствует это описание?',prompt:property,value:a=>a.name,match:property},
-    'property-forward':{text:'Какое описание относится к этой аминокислоте?',prompt:a=>a.name,value:property},
-    essential:{text:'Эта аминокислота незаменима для здорового взрослого?',prompt:a=>a.name,value:essential},
-    'essential-reverse':{text:'Какая из перечисленных аминокислот относится к этой категории для здорового взрослого?',prompt:essential,value:a=>a.name,match:essential}
+    history:{prompt:a=>a.history.clue,value:a=>a.name,id:aminoId,match:a=>'history:'+a.code},
+    'history-forward':{prompt:a=>a.name,value:a=>a.history.clue,id:a=>'history:'+a.code},
+    name:{prompt:a=>a.code,value:a=>a.name,id:aminoId},
+    'name-three':{prompt:a=>a.three,value:a=>a.name,id:aminoId},
+    code:{prompt:a=>a.name,value:a=>a.code,id:a=>'code:'+a.code},
+    three:{prompt:a=>a.name,value:a=>a.three,id:a=>'three:'+a.three},
+    classset:{prompt:a=>a.name,value:classification,id:classificationId},
+    'classset-reverse':{prompt:classification,value:a=>a.name,id:aminoId,match:classificationId},
+    formula:{prompt:a=>a.name,value:a=>a.formula,id:a=>'formula:'+a.formula},
+    'formula-reverse':{prompt:a=>a.formula,value:a=>a.name,id:aminoId,match:a=>a.formula},
+    structure:{prompt:a=>a.structure,value:a=>a.name,id:aminoId},
+    'structure-reverse':{prompt:a=>a.name,value:a=>a.structure,id:a=>'structure:'+a.code},
+    property:{prompt:property,value:a=>a.name,id:aminoId,match:propertyId},
+    'property-forward':{prompt:a=>a.name,value:property,id:propertyId},
+    essential:{prompt:a=>a.name,value:essential,id:a=>'essential:'+Boolean(a.essential)},
+    'essential-reverse':{prompt:essential,value:a=>a.name,id:aminoId,match:a=>Boolean(a.essential)}
   };
   function allowed(a,type){
     if(['history','history-forward'].includes(type))return !!a.history?.clue;
     if(['codon','codon-reverse'].includes(type))return a.group!=='special'&&Array.isArray(a.codons)&&a.codons.length>0;
     return a.group!=='special'||!['classset','classset-reverse','essential','essential-reverse'].includes(type);
   }
-  // forcedCodon permits exhaustive inspection of every synonymous codon.
+  function options(correct,candidates,count,random){
+    const ids=new Set([correct.id]),labels=new Set([correct.label]),unique=[];
+    for(const candidate of candidates){
+      if(ids.has(candidate.id)||labels.has(candidate.label))continue;
+      ids.add(candidate.id);labels.add(candidate.label);unique.push(candidate);
+    }
+    const alternatives=shuffle(unique,random).slice(0,count);
+    if(alternatives.length!==count)throw Error('Not enough distinct translated choices');
+    const all=shuffle([correct,...alternatives],random);
+    return {choices:all.map(x=>x.label),choiceIds:all.map(x=>x.id),correct:correct.label,correctId:correct.id};
+  }
   function codonQuestion(data,a,type,random,forcedCodon){
-    if(!allowed(a,type))throw Error('Недопустимый тип вопроса');
+    if(!allowed(a,type))throw Error('Invalid question type');
     const codon=forcedCodon===undefined?a.codons[Math.floor(random()*a.codons.length)]:forcedCodon;
-    if(!a.codons.includes(codon))throw Error('Кодон не относится к этой аминокислоте');
+    if(!a.codons.includes(codon))throw Error('Codon does not belong to this amino acid');
     const others=data.filter(other=>allowed(other,type)&&other.code!==a.code);
-    const reverse=type==='codon-reverse',correct=reverse?a.name:codon;
-    const candidates=reverse?others.map(other=>other.name):others.flatMap(other=>other.codons).filter(c=>!a.codons.includes(c));
-    const alternatives=shuffle([...new Set(candidates)].filter(c=>c!==correct),random).slice(0,3);
-    if(alternatives.length!==3)throw Error('Недостаточно вариантов ответа');
-    return {code:a.code,type,
-      text:reverse?'Какую аминокислоту кодирует этот кодон?':'Какой из этих кодонов соответствует аминокислоте?',
-      prompt:reverse?codon:a.name,choices:shuffle([correct,...alternatives],random),correct,
-      explanation:`${a.name}: ${a.codons.join(', ')}.`};
+    const reverse=type==='codon-reverse';
+    const correct=reverse?{id:aminoId(a),label:a.name}:{id:'codon:'+codon,label:codon};
+    const candidates=reverse?others.map(other=>({id:aminoId(other),label:other.name})):others.flatMap(other=>other.codons).filter(c=>!a.codons.includes(c)).map(c=>({id:'codon:'+c,label:c}));
+    const q=dictionary(a);
+    return {code:a.code,type,locale:a._locale,text:q.text[type],prompt:reverse?codon:a.name,
+      ...options(correct,candidates,3,random),explanation:format(q.codonExplanation,{name:a.name,codons:a.codons.join(', ')})};
   }
   function question(data,a,type,random=Math.random,forcedCodon){
     if(['codon','codon-reverse'].includes(type))return codonQuestion(data,a,type,random,forcedCodon);
-    const spec=SPECS[type];if(!spec||!allowed(a,type))throw Error('Недопустимый тип вопроса');
-    const correct=spec.value(a);
+    const spec=SPECS[type];if(!spec||!allowed(a,type))throw Error('Invalid question type');
+    const q=dictionary(a),correct={id:spec.id(a),label:spec.value(a)};
     const candidates=data.filter(other=>allowed(other,type)&&(!spec.match||spec.match(other)!==spec.match(a)));
-    let alternatives=type==='essential'?['Незаменимая','Не входит в 9 незаменимых']:candidates.map(spec.value);
-    alternatives=shuffle([...new Set(alternatives)].filter(v=>v!==correct),random).slice(0,type==='essential'?1:3);
-    let explanation=`${a.name} · ${a.three} · ${a.code}. ${a.info}`;
+    const alternatives=type==='essential'?[{id:'essential:true',label:q.essential.yes},{id:'essential:false',label:q.essential.no}]:candidates.map(other=>({id:spec.id(other),label:spec.value(other)}));
+    let explanation=format(q.explanation,a);
     if(['history','history-forward'].includes(type))explanation=a.history.story;
     if(type==='formula'||type==='formula-reverse'){
       const same=data.filter(other=>other.code!==a.code&&other.formula===a.formula);
-      explanation=`${a.formula} — формула свободной аминокислоты. ${same.length?`Такую же формулу имеет ${same.map(x=>x.name.toLowerCase()).join(', ')}. `:''}${a.info}`;
+      explanation=format(q.formulaExplanation,{...a,same:same.length?format(q.sameFormula,{names:same.map(x=>x.name).join(', ')}):''});
     }
-    return {code:a.code,type,text:spec.text,prompt:spec.prompt(a),choices:shuffle([correct,...alternatives],random),correct,explanation};
+    return {code:a.code,type,locale:a._locale,text:q.text[type],prompt:spec.prompt(a),
+      ...options(correct,alternatives,type==='essential'?1:3,random),explanation};
   }
   function build(data,topicId,random=Math.random){
-    const topic=TOPICS.find(t=>t.id===topicId);if(!topic)throw Error('Неизвестная тема');
+    const topic=TOPICS.find(t=>t.id===topicId);if(!topic)throw Error('Unknown topic');
     const standard=data.filter(a=>a.group!=='special');
-    if(standard.length!==20)throw Error('Для экзамена требуется 20 стандартных аминокислот');
+    if(standard.length!==20)throw Error('An exam requires 20 standard amino acids');
     const types=shuffle(topic.types,random);
     // Equal numbers of forward and reverse questions, with balanced types within each.
     const quotas={};for(const direction of [topic.forward,topic.reverse]){
@@ -103,7 +115,7 @@ var ExamCore = (() => {
     if(a.status==='failed'&&a.score===0&&Array.isArray(a.answers))return a.answers.filter(x=>x.feedback?.right===true).length;
     return a.score;
   }
-  function isCurrentAttempt(a){return ['2026-10-v3','2026-10-v4','2026-10-v5','2026-10-v6',VERSION].includes(a.version)&&TOPICS.some(t=>t.id===a.topic);}
+  function isCurrentAttempt(a){return ['2026-10-v3','2026-10-v4','2026-10-v5','2026-10-v6','2026-10-v7',VERSION].includes(a.version)&&TOPICS.some(t=>t.id===a.topic);}
   return {VERSION,LIMIT,MAX_ERRORS,TOPICS,question,allowed,build,publicQuestion,isCurrentAttempt,resultScore};
 })();
 if(typeof module!=='undefined'&&module.exports)module.exports=ExamCore;

@@ -1,0 +1,505 @@
+[
+  {
+    "code": "G",
+    "three": "Gly",
+    "group": "nonpolar",
+    "essential": false,
+    "side": "H",
+    "smiles": "NCC(=O)O",
+    "formula": "C2H5NO2",
+    "structure": "structures/29586479f8cb4e9a880f6d087742cddd.svg",
+    "codons": [
+      "GGU",
+      "GGC",
+      "GGA",
+      "GGG"
+    ],
+    "englishName": "Glycine",
+    "revision": 1,
+    "sources": [
+      "https://en.wiktionary.org/wiki/glycine",
+      "https://en.wikipedia.org/wiki/Glycine#History_and_etymology",
+      "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_s_comet_contains_ingredients_for_life"
+    ],
+    "propertyId": "property:G",
+    "legacyName": "Глицин"
+  },
+  {
+    "code": "A",
+    "three": "Ala",
+    "group": "nonpolar",
+    "essential": false,
+    "side": "CH₃",
+    "smiles": "N[C@@H](C)C(=O)O",
+    "formula": "C3H7NO2",
+    "structure": "structures/a6cdf4506c7a4bb1ad7fd9bf18de14dc.svg",
+    "codons": [
+      "GCU",
+      "GCC",
+      "GCA",
+      "GCG"
+    ],
+    "englishName": "Alanine",
+    "revision": 1,
+    "sources": [
+      "https://en.wikipedia.org/wiki/Alanine#History_and_etymology"
+    ],
+    "propertyId": "property:A",
+    "legacyName": "Аланин"
+  },
+  {
+    "code": "V",
+    "three": "Val",
+    "group": "nonpolar",
+    "essential": true,
+    "side": "CH(CH₃)₂",
+    "smiles": "N[C@@H](C(C)C)C(=O)O",
+    "formula": "C5H11NO2",
+    "structure": "structures/8596d9e99f934289a5eb920a6a8e30f5.svg",
+    "codons": [
+      "GUU",
+      "GUC",
+      "GUA",
+      "GUG"
+    ],
+    "englishName": "Valine",
+    "revision": 1,
+    "sources": [
+      "https://www.cun.es/diccionario-medico/terminos/valina",
+      "https://chemtymology.co.uk/2020/12/18/proline-valine-and-methionine/"
+    ],
+    "propertyId": "property:V",
+    "legacyName": "Валин"
+  },
+  {
+    "code": "L",
+    "three": "Leu",
+    "group": "nonpolar",
+    "essential": true,
+    "side": "CH₂–CH(CH₃)₂",
+    "smiles": "N[C@@H](CC(C)C)C(=O)O",
+    "formula": "C6H13NO2",
+    "structure": "structures/3bd18ae9e5a7473ca8c19441850be5b7.svg",
+    "codons": [
+      "UUA",
+      "UUG",
+      "CUU",
+      "CUC",
+      "CUA",
+      "CUG"
+    ],
+    "englishName": "Leucine",
+    "revision": 1,
+    "sources": [
+      "https://chemtymology.co.uk/2020/12/04/leucine-isoleucine-and-arginine/"
+    ],
+    "propertyId": "property:L",
+    "legacyName": "Лейцин"
+  },
+  {
+    "code": "I",
+    "three": "Ile",
+    "group": "nonpolar",
+    "essential": true,
+    "side": "CH(CH₃)–CH₂–CH₃",
+    "smiles": "CC[C@H](C)[C@H](N)C(=O)O",
+    "formula": "C6H13NO2",
+    "structure": "structures/f40d776c3c844a06b06dd45fc52238ab.svg",
+    "codons": [
+      "AUU",
+      "AUC",
+      "AUA"
+    ],
+    "englishName": "Isoleucine",
+    "revision": 1,
+    "sources": [
+      "https://chemtymology.co.uk/2020/12/04/leucine-isoleucine-and-arginine/"
+    ],
+    "propertyId": "property:I",
+    "legacyName": "Изолейцин"
+  },
+  {
+    "code": "M",
+    "three": "Met",
+    "group": "nonpolar",
+    "essential": true,
+    "side": "CH₂–CH₂–S–CH₃",
+    "smiles": "N[C@@H](CCSC)C(=O)O",
+    "formula": "C5H11NO2S",
+    "structure": "structures/ea2f69cde5c942be937b2bd17872d427.svg",
+    "codons": [
+      "AUG"
+    ],
+    "englishName": "Methionine",
+    "revision": 1,
+    "sources": [
+      "https://chemtymology.co.uk/2020/12/18/proline-valine-and-methionine/",
+      "https://stacks.cdc.gov/view/cdc/68531/cdc_68531_DS1.pdf",
+      "https://doi.org/10.1042/bj0221417"
+    ],
+    "propertyId": "property:M",
+    "legacyName": "Метионин"
+  },
+  {
+    "code": "P",
+    "three": "Pro",
+    "group": "nonpolar",
+    "essential": false,
+    "side": "(CH₂)₃, замкнут на N",
+    "smiles": "O=C(O)[C@@H]1CCCN1",
+    "formula": "C5H9NO2",
+    "structure": "structures/d2f1f39c6e2b4d749b2cfdda9b24f067.svg",
+    "codons": [
+      "CCU",
+      "CCC",
+      "CCA",
+      "CCG"
+    ],
+    "englishName": "Proline",
+    "revision": 1,
+    "sources": [
+      "https://chemtymology.co.uk/2020/12/18/proline-valine-and-methionine/"
+    ],
+    "propertyId": "property:P",
+    "legacyName": "Пролин"
+  },
+  {
+    "code": "F",
+    "three": "Phe",
+    "group": "nonpolar",
+    "essential": true,
+    "side": "CH₂–C₆H₅",
+    "smiles": "N[C@@H](Cc1ccccc1)C(=O)O",
+    "formula": "C9H11NO2",
+    "structure": "structures/056cd17180e54549b42276ced1101f6a.svg",
+    "codons": [
+      "UUU",
+      "UUC"
+    ],
+    "englishName": "Phenylalanine",
+    "revision": 1,
+    "sources": [
+      "https://www.collinsdictionary.com/us/dictionary/english/phenylalanine",
+      "https://iupac.qmul.ac.uk/AminoAcid/AA1n2.html",
+      "https://www.acs.org/education/whatischemistry/landmarks/geneticcode.html"
+    ],
+    "propertyId": "property:F",
+    "legacyName": "Фенилаланин"
+  },
+  {
+    "code": "W",
+    "three": "Trp",
+    "group": "nonpolar",
+    "essential": true,
+    "side": "CH₂–индол",
+    "smiles": "N[C@@H](Cc1c[nH]c2ccccc12)C(=O)O",
+    "formula": "C11H12N2O2",
+    "structure": "structures/b39e7b4a67114893a21633b8cf6b0d77.svg",
+    "codons": [
+      "UGG"
+    ],
+    "englishName": "Tryptophan",
+    "revision": 1,
+    "sources": [
+      "https://www.etymonline.com/word/tryptophan",
+      "https://www.acs.org/molecule-of-the-week/archive/t/tryptophan.html"
+    ],
+    "propertyId": "property:W",
+    "legacyName": "Триптофан"
+  },
+  {
+    "code": "S",
+    "three": "Ser",
+    "group": "polar",
+    "essential": false,
+    "side": "CH₂–OH",
+    "smiles": "N[C@@H](CO)C(=O)O",
+    "formula": "C3H7NO3",
+    "structure": "structures/88c26de4ca47417891ebea088fc08c88.svg",
+    "codons": [
+      "UCU",
+      "UCC",
+      "UCA",
+      "UCG",
+      "AGU",
+      "AGC"
+    ],
+    "englishName": "Serine",
+    "revision": 1,
+    "sources": [
+      "https://www.etymonline.com/word/serine",
+      "https://en.wikipedia.org/wiki/Serine#History"
+    ],
+    "propertyId": "property:S",
+    "legacyName": "Серин"
+  },
+  {
+    "code": "T",
+    "three": "Thr",
+    "group": "polar",
+    "essential": true,
+    "side": "CH(OH)–CH₃",
+    "smiles": "C[C@@H](O)[C@H](N)C(=O)O",
+    "formula": "C4H9NO3",
+    "structure": "structures/59bf55ea409d4dd79061c08d81d915d5.svg",
+    "codons": [
+      "ACU",
+      "ACC",
+      "ACA",
+      "ACG"
+    ],
+    "englishName": "Threonine",
+    "revision": 1,
+    "sources": [
+      "https://chemtymology.co.uk/2019/10/13/threonine-threose-and-erythrose/"
+    ],
+    "propertyId": "property:T",
+    "legacyName": "Треонин"
+  },
+  {
+    "code": "C",
+    "three": "Cys",
+    "group": "polar",
+    "essential": false,
+    "side": "CH₂–SH",
+    "smiles": "N[C@@H](CS)C(=O)O",
+    "formula": "C3H7NO2S",
+    "structure": "structures/ddf7d4af98eb4b5ea212bbc4b87de050.svg",
+    "codons": [
+      "UGU",
+      "UGC"
+    ],
+    "englishName": "Cysteine",
+    "revision": 1,
+    "sources": [
+      "https://chemtymology.co.uk/2020/11/27/cysteine-and-cystine/"
+    ],
+    "propertyId": "property:C",
+    "legacyName": "Цистеин"
+  },
+  {
+    "code": "Y",
+    "three": "Tyr",
+    "group": "polar",
+    "essential": false,
+    "side": "CH₂–C₆H₄–OH",
+    "smiles": "N[C@@H](Cc1ccc(O)cc1)C(=O)O",
+    "formula": "C9H11NO3",
+    "structure": "structures/f23a409d704b4fae8ca2cf3e497cf6db.svg",
+    "codons": [
+      "UAU",
+      "UAC"
+    ],
+    "englishName": "Tyrosine",
+    "revision": 1,
+    "sources": [
+      "https://www.etymonline.com/word/tyrosine",
+      "https://www.acs.org/molecule-of-the-week/archive/t/l-tyrosine.html"
+    ],
+    "propertyId": "property:Y",
+    "legacyName": "Тирозин"
+  },
+  {
+    "code": "N",
+    "three": "Asn",
+    "group": "polar",
+    "essential": false,
+    "side": "CH₂–C(=O)–NH₂",
+    "smiles": "N[C@@H](CC(=O)N)C(=O)O",
+    "formula": "C4H8N2O3",
+    "structure": "structures/c3e3e38627e54d02ba293f9f6e479bc1.svg",
+    "codons": [
+      "AAU",
+      "AAC"
+    ],
+    "englishName": "Asparagine",
+    "revision": 1,
+    "sources": [
+      "https://pubchem.ncbi.nlm.nih.gov/pathway/BioCyc%3AHUMAN_ASPARAGINE-BIOSYNTHESIS",
+      "https://en.wikipedia.org/wiki/Asparagine#History"
+    ],
+    "propertyId": "property:N",
+    "legacyName": "Аспарагин"
+  },
+  {
+    "code": "Q",
+    "three": "Gln",
+    "group": "polar",
+    "essential": false,
+    "side": "CH₂–CH₂–C(=O)–NH₂",
+    "smiles": "N[C@@H](CCC(=O)N)C(=O)O",
+    "formula": "C5H10N2O3",
+    "structure": "structures/faa4dc81c3964bb6a399514cbb60f722.svg",
+    "codons": [
+      "CAA",
+      "CAG"
+    ],
+    "englishName": "Glutamine",
+    "revision": 1,
+    "sources": [
+      "https://en.wikipedia.org/wiki/Glutamine",
+      "https://iupac.qmul.ac.uk/AminoAcid/AA1n2.html",
+      "https://dingler.bbaw.de/articles/mi247is12.html"
+    ],
+    "propertyId": "property:Q",
+    "legacyName": "Глутамин"
+  },
+  {
+    "code": "D",
+    "three": "Asp",
+    "group": "acidic",
+    "essential": false,
+    "side": "CH₂–COOH",
+    "smiles": "N[C@@H](CC(=O)O)C(=O)O",
+    "formula": "C4H7NO4",
+    "structure": "structures/321e0238737744e7acd13fa8a21a2e92.svg",
+    "codons": [
+      "GAU",
+      "GAC"
+    ],
+    "englishName": "Aspartic acid",
+    "revision": 1,
+    "sources": [
+      "https://en.wikipedia.org/wiki/Aspartic_acid#Discovery"
+    ],
+    "propertyId": "property:D",
+    "legacyName": "Аспарагиновая кислота"
+  },
+  {
+    "code": "E",
+    "three": "Glu",
+    "group": "acidic",
+    "essential": false,
+    "side": "CH₂–CH₂–COOH",
+    "smiles": "N[C@@H](CCC(=O)O)C(=O)O",
+    "formula": "C5H9NO4",
+    "structure": "structures/3e8bd8c44ea34742943c2d7e71bdc116.svg",
+    "codons": [
+      "GAA",
+      "GAG"
+    ],
+    "englishName": "Glutamic acid",
+    "revision": 1,
+    "sources": [
+      "https://upload.wikimedia.org/wikipedia/commons/d/df/The_physiology_of_the_amino_acids_%28IA_physiologyofamin00underich%29.pdf",
+      "https://www.umamiinfo.com/what/whatisumami/"
+    ],
+    "propertyId": "property:E",
+    "legacyName": "Глутаминовая кислота"
+  },
+  {
+    "code": "K",
+    "three": "Lys",
+    "group": "basic",
+    "essential": true,
+    "side": "(CH₂)₄–NH₂",
+    "smiles": "N[C@@H](CCCCN)C(=O)O",
+    "formula": "C6H14N2O2",
+    "structure": "structures/bcd2e23cebf4408498b5d7287ff7a54e.svg",
+    "codons": [
+      "AAA",
+      "AAG"
+    ],
+    "englishName": "Lysine",
+    "revision": 1,
+    "sources": [
+      "https://www.dictionnaire-academie.fr/article/A9L1457",
+      "https://www.acs.org/molecule-of-the-week/archive/l/l-lysine.html"
+    ],
+    "propertyId": "property:K",
+    "legacyName": "Лизин"
+  },
+  {
+    "code": "R",
+    "three": "Arg",
+    "group": "basic",
+    "essential": false,
+    "side": "(CH₂)₃–NH–C(=NH)–NH₂",
+    "smiles": "N[C@@H](CCCNC(=N)N)C(=O)O",
+    "formula": "C6H14N4O2",
+    "structure": "structures/7055bfe433854ebcbcfe45d188183824.svg",
+    "codons": [
+      "CGU",
+      "CGC",
+      "CGA",
+      "CGG",
+      "AGA",
+      "AGG"
+    ],
+    "englishName": "Arginine",
+    "revision": 1,
+    "sources": [
+      "https://chemtymology.co.uk/2020/12/04/leucine-isoleucine-and-arginine/",
+      "https://en.wikipedia.org/wiki/Phenylalanine#History"
+    ],
+    "propertyId": "property:R",
+    "legacyName": "Аргинин"
+  },
+  {
+    "code": "H",
+    "three": "His",
+    "group": "basic",
+    "essential": true,
+    "side": "CH₂–имидазол",
+    "smiles": "N[C@@H](Cc1cnc[nH]1)C(=O)O",
+    "formula": "C6H9N3O2",
+    "structure": "structures/4299ec1cb7114636b0f3d3825629de4c.svg",
+    "codons": [
+      "CAU",
+      "CAC"
+    ],
+    "englishName": "Histidine",
+    "revision": 1,
+    "sources": [
+      "https://www.etymonline.com/word/histidine",
+      "https://www.nobelprize.org/prizes/medicine/1910/kossel/biographical/",
+      "https://en.wikipedia.org/wiki/Histidine"
+    ],
+    "propertyId": "property:H",
+    "legacyName": "Гистидин"
+  },
+  {
+    "code": "U",
+    "three": "Sec",
+    "group": "special",
+    "essential": null,
+    "side": "CH₂–SeH",
+    "smiles": "N[C@@H](C[SeH])C(=O)O",
+    "formula": "C3H7NO2Se",
+    "structure": "structures/59d405e5f60244da923a869c56f61428.svg",
+    "codons": [
+      "UGA"
+    ],
+    "englishName": "Selenocysteine",
+    "revision": 1,
+    "sources": [
+      "https://www.ncbi.nlm.nih.gov/mesh/68017279",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC2933860/",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC1311585/",
+      "https://academic.oup.com/femsec/article/96/12/fiaa209/5921172"
+    ],
+    "propertyId": "property:U",
+    "legacyName": "Селеноцистеин"
+  },
+  {
+    "code": "O",
+    "three": "Pyl",
+    "group": "special",
+    "essential": null,
+    "side": "(CH₂)₄–NH–C(=O)–R",
+    "smiles": "C[C@@H]1CC=N[C@H]1C(=O)NCCCC[C@H](N)C(=O)O",
+    "formula": "C12H21N3O3",
+    "structure": "structures/23e8b8f1807e4376bcaa72eaa8f2acc2.svg",
+    "codons": [
+      "UAG"
+    ],
+    "englishName": "Pyrrolysine",
+    "revision": 1,
+    "sources": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3968831/",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC2933860/"
+    ],
+    "propertyId": "property:O",
+    "legacyName": "Пирролизин"
+  }
+]

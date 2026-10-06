@@ -1,0 +1,14 @@
+{
+  "code": "N",
+  "sourceRevision": 1,
+  "name": "Asparagine",
+  "info": "The amide of aspartic acid; its side chain is uncharged at a pH of about 7.",
+  "feature": "Amide group",
+  "history": {
+    "clue": "The first amino acid to be isolated, it was obtained from asparagus juice, and its name recalls that plant.",
+    "story": "In 1806, Louis Nicolas Vauquelin and Pierre Jean Robiquet isolated a crystalline substance from asparagus juice. Asparagine became the first amino acid to be isolated, and it took its name from asparagus. It was discovered long before the modern understanding of protein structure emerged."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Asparagine"
+  }
+}

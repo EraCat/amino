@@ -1,0 +1,14 @@
+{
+  "code": "W",
+  "sourceRevision": 1,
+  "name": "Tryptophan",
+  "info": "A large aromatic indole side chain; absorbs UV light near 280 nm.",
+  "feature": "Indole ring",
+  "history": {
+    "clue": "The name is connected with trypsin and the Greek word for “to show.”",
+    "story": "The name combines a reference to trypsin with the Greek phainein, meaning “to show, reveal”: the substance was studied among the products of protein digestion. In 1901, Frederick Gowland Hopkins and Sydney Cole isolated tryptophan from casein. Hopkins later received the Nobel Prize for work connected with the discovery of vitamins."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Tryptophan"
+  }
+}

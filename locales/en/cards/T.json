@@ -1,0 +1,14 @@
+{
+  "code": "T",
+  "sourceRevision": 1,
+  "name": "Threonine",
+  "info": "A hydroxyl group and two chiral centers. It can be phosphorylated.",
+  "feature": "Two chiral centers",
+  "history": {
+    "clue": "The name is connected with the sugar threose and the spatial arrangement of its groups.",
+    "story": "In the 1930s, William Rose's group discovered that rats did not grow on a mixture of all the amino acids known at the time. The search for the missing component led to threonine: the compound was isolated in 1935, and its spatial structure was clarified in 1936. It was named for the similarity of its group arrangement to that of the sugar threose."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Threonine"
+  }
+}

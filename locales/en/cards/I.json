@@ -1,0 +1,14 @@
+{
+  "code": "I",
+  "sourceRevision": 1,
+  "name": "Isoleucine",
+  "info": "A BCAA with two chiral centers. It has the same molecular formula as leucine.",
+  "feature": "Two chiral centers",
+  "history": {
+    "clue": "The name indicates that it is an isomer of leucine.",
+    "story": "In the early twentieth century, chemists noticed that different batches of isolated leucine differed in solubility and optical rotation. In 1903, Felix Ehrlich established the presence of another amino acid: isoleucine. Its name means an isomer of leucine; the formula is the same, but the carbon chain branches differently."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Isoleucine"
+  }
+}

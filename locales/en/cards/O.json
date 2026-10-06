@@ -1,0 +1,16 @@
+{
+  "code": "O",
+  "sourceRevision": 1,
+  "name": "Pyrrolysine",
+  "info": "The 22nd genetically encoded amino acid in some archaea and bacteria. The ε-amino group of a lysine moiety forms an amide bond with a methylpyrroline carbonyl moiety. It is incorporated through special decoding of UAG.",
+  "feature": "Rare encoded amino acid",
+  "history": {
+    "clue": "Discovered in 2002 in a methyltransferase from a methanogenic archaeon.",
+    "story": "In 2002, pyrrolysine was discovered in the active site of a methyltransferase from the methanogenic archaeon Methanosarcina barkeri. The unusual residue was observed while researchers studied the enzyme's three-dimensional structure. The name combines the pyrroline ring with the lysine moiety. Pyrrolysine became the 22nd known genetically encoded amino acid."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Pyrrolysine"
+  },
+  "codonNote": "UAG is normally a stop codon. In some archaea and bacteria, a specialized translation system allows pyrrolysine to be incorporated.",
+  "sideLabel": "(CH₂)₄–NH–C(=O)–methylpyrroline ring"
+}

@@ -1,0 +1,15 @@
+{
+  "code": "U",
+  "sourceRevision": 1,
+  "name": "Selenocysteine",
+  "info": "The 21st genetically encoded amino acid. It is incorporated through special decoding of UGA; at a pH of about 7, its side chain is predominantly negatively charged.",
+  "feature": "Contains selenium",
+  "history": {
+    "clue": "The name indicates an analogue of cysteine with selenium in place of sulfur.",
+    "story": "The name selenocysteine describes its structure: it is an analogue of cysteine with selenium in place of sulfur. Thressa Stadtman's research helped establish the role of selenium in proteins. In 1986, researchers found that UGA, a codon that normally signals a stop in synthesis, occurs at the position of this amino acid in the genes of certain selenium-containing enzymes."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Selenocysteine"
+  },
+  "codonNote": "UGA is normally a stop codon. Selenocysteine is incorporated through special decoding of UGA with the participation of additional signals and factors."
+}

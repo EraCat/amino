@@ -1,0 +1,14 @@
+{
+  "code": "P",
+  "sourceRevision": 1,
+  "name": "Proline",
+  "info": "The side chain closes back onto the nitrogen, forming a secondary amino group. It restricts chain flexibility and often disrupts an α-helix.",
+  "feature": "Cyclic structure",
+  "history": {
+    "clue": "The name is shortened from “pyrrolidine,” the name of the saturated five-membered ring.",
+    "story": "Proline was synthesized in 1900 and found among the components of proteins a year later. It was initially called pyrrolidine-α-carboxylic acid. In 1904, Emil Fischer proposed the abbreviation “proline,” because the long name was inconvenient when describing peptides. The short name retained a reference to the five-membered pyrrolidine ring."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Proline"
+  }
+}

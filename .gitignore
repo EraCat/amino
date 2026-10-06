@@ -5,7 +5,8 @@ private-data/
 !.env.example
 node_modules/
 .idea/
-.vscode/
+.vscode/*
+!.vscode/settings.json
 .DS_Store
 Thumbs.db
 *.log

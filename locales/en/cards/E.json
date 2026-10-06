@@ -1,0 +1,14 @@
+{
+  "code": "E",
+  "sourceRevision": 1,
+  "name": "Glutamic acid",
+  "info": "At a pH of about 7, the side-chain carboxylate is predominantly negatively charged. The ionized form is glutamate.",
+  "feature": "Acidic side chain",
+  "history": {
+    "clue": "The name is connected with gluten, from which the substance was first isolated.",
+    "story": "In 1866, Karl Ritthausen isolated glutamic acid from wheat gluten, which gave the substance its name. In 1908, Kikunae Ikeda established that glutamate gives kombu seaweed broth its characteristic taste. He called this taste “umami.” Thus, one amino acid linked the history of protein chemistry with Japanese cuisine."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Glutamic_acid"
+  }
+}

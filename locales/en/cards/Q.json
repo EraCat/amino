@@ -1,0 +1,14 @@
+{
+  "code": "Q",
+  "sourceRevision": 1,
+  "name": "Glutamine",
+  "info": "The amide of glutamic acid. It transports nitrogen; under some conditions, demand exceeds synthesis.",
+  "feature": "Amide group",
+  "history": {
+    "clue": "The name is connected with glutamic acid, of which this substance is the amide.",
+    "story": "Glutamine was first isolated from beet juice by Schulze and Bosshard in 1883. The name reflects its relationship to glutamic acid: glutamine is its amide. Through glutamic acid, their shared root goes back to gluten, although glutamine itself was first obtained from beets."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Glutamine"
+  }
+}

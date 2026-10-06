@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Amino acid translation",
+  "description": "Draft translations may be incomplete. Published language completeness is checked by npm run check:locales.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["code", "sourceRevision"],
+  "properties": {
+    "code": {"type": "string", "pattern": "^[A-Z]$"},
+    "sourceRevision": {"type": "integer", "minimum": 1},
+    "name": {"type": "string", "minLength": 1},
+    "info": {"type": "string", "minLength": 1},
+    "feature": {"type": "string", "minLength": 1},
+    "sideLabel": {"type": "string", "minLength": 1},
+    "codonNote": {"type": "string", "minLength": 1},
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "clue": {"type": "string", "minLength": 1},
+        "story": {"type": "string", "minLength": 1}
+      }
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {"wikipedia": {"type": "string", "pattern": "^https://"}}
+    }
+  }
+}

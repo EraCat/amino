@@ -1,0 +1,14 @@
+{
+  "code": "M",
+  "sourceRevision": 1,
+  "name": "Methionine",
+  "info": "Contains sulfur in a thioether. Unlike cysteine, it does not form disulfide bridges.",
+  "feature": "Thioether",
+  "history": {
+    "clue": "The name abbreviates a description of its methyl-containing sulfur fragment.",
+    "story": "In 1921, John Howard Mueller isolated a new sulfur-containing amino acid from casein. In 1928, Barger and Coyne established its structure and proposed the name “methionine.” It abbreviates a description of the –S–CH₃ fragment: “meth-” refers to methyl, while “thio-” refers to sulfur."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Methionine"
+  }
+}

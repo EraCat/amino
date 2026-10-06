@@ -1,0 +1,14 @@
+{
+  "code": "V",
+  "sourceRevision": 1,
+  "name": "Valine",
+  "info": "A hydrophobic branched-chain amino acid (BCAA).",
+  "feature": "Branched chain",
+  "history": {
+    "clue": "The name is connected with valeric acid and, through it, with valerian.",
+    "story": "The name valine is connected with valeric acid, which was named after valerian. Chemists regarded the amino acid as a derivative of isovaleric acid; Emil Fischer proposed the short name “valine” in 1906. Thus, the name of a plant left its trace in the name of a protein component."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Valine"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "code": "F",
+  "sourceRevision": 1,
+  "name": "Phenylalanine",
+  "info": "A nonpolar aromatic side chain. A precursor of tyrosine.",
+  "feature": "Aromatic",
+  "history": {
+    "clue": "The name combines “phenyl” and “alanine.”",
+    "story": "“Phenylalanine” combines the words “phenyl” and “alanine” and describes the –CH₂–C₆H₅ side chain. In 1961, this amino acid helped decode the genetic code: in Nirenberg and Matthaei's experiment, RNA made of repeating U residues directed the synthesis of a phenylalanine chain. This established the meaning of the UUU codon."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Phenylalanine"
+  }
+}

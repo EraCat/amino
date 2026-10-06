@@ -1,0 +1,14 @@
+{
+  "code": "Y",
+  "sourceRevision": 1,
+  "name": "Tyrosine",
+  "info": "An aromatic phenol with a hydrophobic ring and a polar OH group. It can be phosphorylated and is synthesized from phenylalanine.",
+  "feature": "Phenol group",
+  "history": {
+    "clue": "The name comes from the Greek word for “cheese.”",
+    "story": "The Greek tyros means “cheese.” In 1846, Justus von Liebig isolated tyrosine while studying casein, a protein in milk and cheese. The name preserves the history of its isolation: cheese → casein → tyrosine."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Tyrosine"
+  }
+}

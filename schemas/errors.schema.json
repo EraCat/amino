@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Amino errors translations",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "participant_unavailable": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name_required": {
+      "type": "string",
+      "minLength": 1
+    },
+    "invalid_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attempt_not_found": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rate_limited": {
+      "type": "string",
+      "minLength": 1
+    },
+    "request_too_large": {
+      "type": "string",
+      "minLength": 1
+    },
+    "invalid_request": {
+      "type": "string",
+      "minLength": 1
+    },
+    "origin_rejected": {
+      "type": "string",
+      "minLength": 1
+    },
+    "json_required": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unknown_topic": {
+      "type": "string",
+      "minLength": 1
+    },
+    "invalid_request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "active_exam": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attempt_limit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "invalid_answer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "answer_saved": {
+      "type": "string",
+      "minLength": 1
+    },
+    "exam_finished": {
+      "type": "string",
+      "minLength": 1
+    },
+    "refresh_question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "choice_not_found": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_not_found": {
+      "type": "string",
+      "minLength": 1
+    },
+    "route_not_found": {
+      "type": "string",
+      "minLength": 1
+    },
+    "method_not_supported": {
+      "type": "string",
+      "minLength": 1
+    },
+    "page_not_found": {
+      "type": "string",
+      "minLength": 1
+    },
+    "file_not_found": {
+      "type": "string",
+      "minLength": 1
+    },
+    "save_failed": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unsupported_locale": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

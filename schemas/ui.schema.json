@@ -1,0 +1,1026 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Amino ui translations",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "api": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "serverRequired": {
+          "type": "string",
+          "minLength": 1
+        },
+        "networkError": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timeout": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "legacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "names": {
+          "type": "string",
+          "minLength": 1
+        },
+        "codes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "structurePrompt": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "common": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "close": {
+          "type": "string",
+          "minLength": 1
+        },
+        "loading": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retry": {
+          "type": "string",
+          "minLength": 1
+        },
+        "refresh": {
+          "type": "string",
+          "minLength": 1
+        },
+        "correct": {
+          "type": "string",
+          "minLength": 1
+        },
+        "error": {
+          "type": "string",
+          "minLength": 1
+        },
+        "correctAnswer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "yourAnswer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "result": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nextQuestion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "viewResult": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sources": {
+          "type": "string",
+          "minLength": 1
+        },
+        "open": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "home": {
+          "type": "string",
+          "minLength": 1
+        },
+        "github": {
+          "type": "string",
+          "minLength": 1
+        },
+        "help": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "language": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locked": {
+          "type": "string",
+          "minLength": 1
+        },
+        "examLocale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "nav": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "train": {
+          "type": "string",
+          "minLength": 1
+        },
+        "library": {
+          "type": "string",
+          "minLength": 1
+        },
+        "progress": {
+          "type": "string",
+          "minLength": 1
+        },
+        "leaderboard": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "groups": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "nonpolar": {
+          "type": "string",
+          "minLength": 1
+        },
+        "polar": {
+          "type": "string",
+          "minLength": 1
+        },
+        "acidic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "special": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliphatic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aromatic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sulfur": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bcaa": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hydroxyl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "amide": {
+          "type": "string",
+          "minLength": 1
+        },
+        "polarMap": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basicMap": {
+          "type": "string",
+          "minLength": 1
+        },
+        "acidicMap": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "modes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mix": {
+          "type": "string",
+          "minLength": 1
+        },
+        "names": {
+          "type": "string",
+          "minLength": 1
+        },
+        "codons": {
+          "type": "string",
+          "minLength": 1
+        },
+        "class": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formula": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "type": "string",
+          "minLength": 1
+        },
+        "history": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "practice": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "topic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "set": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tenQuestions": {
+          "type": "string",
+          "minLength": 1
+        },
+        "standardSet": {
+          "type": "string",
+          "minLength": 1
+        },
+        "allSet": {
+          "type": "string",
+          "minLength": 1
+        },
+        "allSetTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "string",
+          "minLength": 1
+        },
+        "statistics": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rounds": {
+          "type": "string",
+          "minLength": 1
+        },
+        "answers": {
+          "type": "string",
+          "minLength": 1
+        },
+        "accuracy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "toReview": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aminoOfDay": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repeatMistakes": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repeatMistakesCount": {
+          "type": "string",
+          "minLength": 1
+        },
+        "storageWarning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "finish": {
+          "type": "string",
+          "minLength": 1
+        },
+        "questionProgress": {
+          "type": "string",
+          "minLength": 1
+        },
+        "correctCount": {
+          "type": "string",
+          "minLength": 1
+        },
+        "roundProgress": {
+          "type": "string",
+          "minLength": 1
+        },
+        "topicLabels": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "structure": {
+              "type": "string",
+              "minLength": 1
+            },
+            "formula": {
+              "type": "string",
+              "minLength": 1
+            },
+            "class": {
+              "type": "string",
+              "minLength": 1
+            },
+            "properties": {
+              "type": "string",
+              "minLength": 1
+            },
+            "codons": {
+              "type": "string",
+              "minLength": 1
+            },
+            "history": {
+              "type": "string",
+              "minLength": 1
+            },
+            "names": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "structureNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "codonNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "percentCorrect": {
+          "type": "string",
+          "minLength": 1
+        },
+        "anotherRound": {
+          "type": "string",
+          "minLength": 1
+        },
+        "codon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "yourAnswer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "correctWas": {
+          "type": "string",
+          "minLength": 1
+        },
+        "finishTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "finishBody": {
+          "type": "string",
+          "minLength": 1
+        },
+        "finishAction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "leaveTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "leaveBody": {
+          "type": "string",
+          "minLength": 1
+        },
+        "leaveAction": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "library": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "searchPlaceholder": {
+          "type": "string",
+          "minLength": 1
+        },
+        "searchLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "filterLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "allGroups": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nothing": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structureAlt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structureOptionAlt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structureFormulaAlt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "groupsSummary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "groupsNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "historyTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "codons": {
+          "type": "string",
+          "minLength": 1
+        },
+        "standardCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formula": {
+          "type": "string",
+          "minLength": 1
+        },
+        "side": {
+          "type": "string",
+          "minLength": 1
+        },
+        "feature": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diet": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dietUnknown": {
+          "type": "string",
+          "minLength": 1
+        },
+        "essential": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notEssential": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conditionallyEssential": {
+          "type": "string",
+          "minLength": 1
+        },
+        "wikipedia": {
+          "type": "string",
+          "minLength": 1
+        },
+        "neutralNote": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "progress": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "answersTotal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "inTraining": {
+          "type": "string",
+          "minLength": 1
+        },
+        "byAmino": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mistakes": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rowStatus": {
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reset": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resetTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resetBody": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resetAction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trainingStats": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "help": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sets": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classificationTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classification1": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classification2": {
+          "type": "string",
+          "minLength": 1
+        },
+        "geneticTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "genetic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formulaTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formula": {
+          "type": "string",
+          "minLength": 1
+        },
+        "historyTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "history": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourcesTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stored": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceGenetic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceClassification": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceProperties": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceCells": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceEssential": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceHistidine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourcePubchem": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "exam": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "totalScore": {
+          "type": "string",
+          "minLength": 1
+        },
+        "onePoint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failureRule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "loadingResults": {
+          "type": "string",
+          "minLength": 1
+        },
+        "offline": {
+          "type": "string",
+          "minLength": 1
+        },
+        "continue": {
+          "type": "string",
+          "minLength": 1
+        },
+        "topicMeta": {
+          "type": "string",
+          "minLength": 1
+        },
+        "noResult": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retake": {
+          "type": "string",
+          "minLength": 1
+        },
+        "take": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rankingNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attemptHistory": {
+          "type": "string",
+          "minLength": 1
+        },
+        "overallRanking": {
+          "type": "string",
+          "minLength": 1
+        },
+        "previousVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "running": {
+              "type": "string",
+              "minLength": 1
+            },
+            "passed": {
+              "type": "string",
+              "minLength": 1
+            },
+            "failed": {
+              "type": "string",
+              "minLength": 1
+            },
+            "unfinished": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "points": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "one": {
+              "type": "string",
+              "minLength": 1
+            },
+            "few": {
+              "type": "string",
+              "minLength": 1
+            },
+            "many": {
+              "type": "string",
+              "minLength": 1
+            },
+            "other": {
+              "type": "string",
+              "minLength": 1
+            },
+            "zero": {
+              "type": "string",
+              "minLength": 1
+            },
+            "two": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "errors": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "one": {
+              "type": "string",
+              "minLength": 1
+            },
+            "few": {
+              "type": "string",
+              "minLength": 1
+            },
+            "many": {
+              "type": "string",
+              "minLength": 1
+            },
+            "other": {
+              "type": "string",
+              "minLength": 1
+            },
+            "zero": {
+              "type": "string",
+              "minLength": 1
+            },
+            "two": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "questionsAnswered": {
+          "type": "string",
+          "minLength": 1
+        },
+        "startRules": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nameLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publishNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resumeFailed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "finish": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "errorCount": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pointAwarded": {
+          "type": "string",
+          "minLength": 1
+        },
+        "result": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retryAnswer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published": {
+          "type": "string",
+          "minLength": 1
+        },
+        "share": {
+          "type": "string",
+          "minLength": 1
+        },
+        "topicResults": {
+          "type": "string",
+          "minLength": 1
+        },
+        "shareTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "linkCopied": {
+          "type": "string",
+          "minLength": 1
+        },
+        "linkTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "languageName": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ru": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "abandonTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "abandonBody": {
+          "type": "string",
+          "minLength": 1
+        },
+        "abandonAction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "leaveTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "leaveBody": {
+          "type": "string",
+          "minLength": 1
+        },
+        "leaveAction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultUnavailable": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "ranking": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bestSum": {
+          "type": "string",
+          "minLength": 1
+        },
+        "totalLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "passed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notPassed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "history": {
+          "type": "string",
+          "minLength": 1
+        },
+        "empty": {
+          "type": "string",
+          "minLength": 1
+        },
+        "chooseExam": {
+          "type": "string",
+          "minLength": 1
+        },
+        "chainPassed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "chainNotPassed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "historyTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "historyUnavailable": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

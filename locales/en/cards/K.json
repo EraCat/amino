@@ -1,0 +1,14 @@
+{
+  "code": "K",
+  "sourceRevision": 1,
+  "name": "Lysine",
+  "info": "At a pH of about 7, the side-chain amino group is predominantly positively charged.",
+  "feature": "Basic side chain",
+  "history": {
+    "clue": "The name goes back to the Greek word for “release, dissolution.”",
+    "story": "The name lysine goes back to the Greek lysis, meaning “release, dissolution,” as in the word “hydrolysis.” In 1889, Edmund Drechsel isolated lysine by hydrolyzing casein. Milk protein proved to be the source for the discovery of several amino acids, including lysine and tyrosine."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Lysine"
+  }
+}

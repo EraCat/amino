@@ -1,0 +1,76 @@
+{
+  "groups": {
+    "nonpolar": "Nonpolar",
+    "polar": "Polar uncharged",
+    "acidic": "Acidic",
+    "basic": "Basic",
+    "special": "Rare proteinogenic"
+  },
+  "axes": {
+    "aromatic": "Aromatic ring",
+    "aliphatic": "Hydrophobic aliphatic",
+    "sulfur": "Sulfur-containing",
+    "bcaa": "BCAA",
+    "hydroxyl": "Hydroxyl group",
+    "amide": "Amide side chain"
+  },
+  "topics": {
+    "names-codes": {
+      "title": "Names and codes",
+      "description": "Names from codes and codes from names"
+    },
+    "codons": {
+      "title": "Genetic code",
+      "description": "mRNA codons and amino acids in the standard genetic code"
+    },
+    "classification": {
+      "title": "Classification",
+      "description": "Amino acids and side-chain categories"
+    },
+    "formulas": {
+      "title": "Formulas",
+      "description": "Amino acids and molecular formulas"
+    },
+    "structures": {
+      "title": "Structures",
+      "description": "Amino acids and chemical structures"
+    },
+    "properties": {
+      "title": "Properties",
+      "description": "Distinctive features and essentiality"
+    },
+    "history": {
+      "title": "History and etymology",
+      "description": "Origins of names and stories of discovery"
+    }
+  },
+  "text": {
+    "history": "Which amino acid does this fact describe?",
+    "history-forward": "Which fact describes this amino acid?",
+    "name": "Which amino acid has this one-letter code?",
+    "name-three": "Which amino acid has this three-letter code?",
+    "code": "What is the one-letter code for this amino acid?",
+    "three": "What is the three-letter code for this amino acid?",
+    "classset": "Which set of categories describes this amino acid in the quiz classification?",
+    "classset-reverse": "Which of these amino acids has this set of categories in the quiz classification?",
+    "formula": "What is the molecular formula of this amino acid?",
+    "formula-reverse": "Which of these amino acids has this molecular formula?",
+    "structure": "Which amino acid is shown?",
+    "structure-reverse": "Which structure corresponds to this amino acid?",
+    "property": "Which amino acid matches this description?",
+    "property-forward": "Which description matches this amino acid?",
+    "essential": "Is this amino acid essential for a healthy adult?",
+    "essential-reverse": "Which of these amino acids belongs to this category for a healthy adult?",
+    "codon": "Which of these codons corresponds to this amino acid?",
+    "codon-reverse": "Which amino acid does this codon encode?"
+  },
+  "essential": {
+    "yes": "Essential",
+    "no": "Not one of the 9 essential amino acids"
+  },
+  "property": "{feature}. Side chain: {side}.",
+  "explanation": "{name} · {three} · {code}. {info}",
+  "formulaExplanation": "{formula} is the formula of the free amino acid. {same}{info}",
+  "sameFormula": "{names} has the same formula. ",
+  "codonExplanation": "{name}: {codons}."
+}

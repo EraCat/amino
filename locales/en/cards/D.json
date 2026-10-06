@@ -1,0 +1,14 @@
+{
+  "code": "D",
+  "sourceRevision": 1,
+  "name": "Aspartic acid",
+  "info": "At a pH of about 7, the side-chain carboxylate is predominantly negatively charged. The ionized form is aspartate.",
+  "feature": "Acidic side chain",
+  "history": {
+    "clue": "It was first obtained by hydrolyzing asparagine, and its name preserves that connection.",
+    "story": "In 1827, aspartic acid was obtained by hydrolyzing the already known asparagine. In this process, the side-chain amide group is converted into a carboxyl group. The name retained its relationship to asparagine and, through it, to asparagus, from whose juice asparagine had been isolated."
+  },
+  "links": {
+    "wikipedia": "https://en.wikipedia.org/wiki/Aspartic_acid"
+  }
+}

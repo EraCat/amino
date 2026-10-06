@@ -1,0 +1,280 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Amino questions translations",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "groups": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "nonpolar": {
+          "type": "string",
+          "minLength": 1
+        },
+        "polar": {
+          "type": "string",
+          "minLength": 1
+        },
+        "acidic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "special": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "axes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "aromatic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliphatic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sulfur": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bcaa": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hydroxyl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "amide": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "topics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "names-codes": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "codons": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "formulas": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "structures": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "history": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "history": {
+          "type": "string",
+          "minLength": 1
+        },
+        "history-forward": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name-three": {
+          "type": "string",
+          "minLength": 1
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "three": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classset": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classset-reverse": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formula": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formula-reverse": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structure-reverse": {
+          "type": "string",
+          "minLength": 1
+        },
+        "property": {
+          "type": "string",
+          "minLength": 1
+        },
+        "property-forward": {
+          "type": "string",
+          "minLength": 1
+        },
+        "essential": {
+          "type": "string",
+          "minLength": 1
+        },
+        "essential-reverse": {
+          "type": "string",
+          "minLength": 1
+        },
+        "codon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "codon-reverse": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "essential": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "yes": {
+          "type": "string",
+          "minLength": 1
+        },
+        "no": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "property": {
+      "type": "string",
+      "minLength": 1
+    },
+    "explanation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "formulaExplanation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sameFormula": {
+      "type": "string",
+      "minLength": 1
+    },
+    "codonExplanation": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

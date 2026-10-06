@@ -2,6 +2,12 @@
   "name": "amino-exams",
   "version": "1.0.0",
   "private": true,
-  "scripts": { "start": "node server.mjs" },
+  "scripts": {
+    "start": "node server.mjs",
+    "check:locales": "node scripts/validate-locales.mjs",
+    "check:js": "node --check bootstrap.js && node --check app.js && node --check exam-ui.js && node --check exam-core.js && node --check server.mjs && node --check localization.mjs",
+    "schemas:locales": "node scripts/generate-locale-schemas.mjs",
+    "smoke:locales": "node scripts/smoke-localization.mjs"
+  },
   "engines": { "node": ">=22" }
 }
