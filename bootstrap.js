@@ -21,6 +21,9 @@
       document.documentElement.lang=locale;document.title=I18n.t('meta.title');document.querySelector('meta[name="description"]').content=I18n.t('meta.description');
       document.querySelectorAll('[data-i18n]').forEach(node=>{node.textContent=I18n.t(node.dataset.i18n);});document.querySelectorAll('[data-i18n-aria]').forEach(node=>{node.setAttribute('aria-label',I18n.t(node.dataset.i18nAria));});document.querySelectorAll('[data-i18n-title]').forEach(node=>{node.title=I18n.t(node.dataset.i18nTitle);});
       const select=document.querySelector('#language-select');select.innerHTML=languages.filter(item=>item.published).map(item=>`<option value="${escapeHtml(item.code)}"${item.code===locale?' selected':''}>${escapeHtml(item.name)}</option>`).join('');select.setAttribute('aria-label',I18n.t('language.label'));select.onchange=()=>I18n.setLanguage(select.value);
+      const mobileLanguage=window.matchMedia('(max-width:700px)');
+      const updateLanguageLabels=()=>{for(const option of select.options){const language=languages.find(item=>item.code===option.value);option.textContent=mobileLanguage.matches?Array.from(language.name).slice(0,3).join(''):language.name;option.setAttribute('aria-label',language.name);}};
+      updateLanguageLabels();mobileLanguage.addEventListener('change',updateLanguageLabels);
       await loadScript('exam-core.js');for(const topic of ExamCore.TOPICS)Object.assign(topic,questions.topics[topic.id]||{});await loadScript('app.js');await loadScript('exam-ui.js');
     }catch(error){console.error(error);showState(provisional,true);}
   }
