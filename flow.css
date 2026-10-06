@@ -49,3 +49,6 @@
 .github-link:hover{background:#e8edf5}
 
 .feedback{scroll-margin-bottom:110px}.answer-copy .pill{font-size:14px}.answer.correct .pill,.answer.wrong .pill{background:transparent;color:inherit;padding:0}
+
+/* Short, sourced stories in the amino acid reference and quiz feedback. */
+.history-story{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}.history-story h2{font-size:20px}.history-story p{line-height:1.65}.history-sources{font-size:13px;line-height:1.6;overflow-wrap:anywhere}.history-sources a{color:var(--select);text-underline-offset:3px}

@@ -1,6 +1,6 @@
 /* Shared questions for practice and exams. One correct answer = one point. */
 var ExamCore = (() => {
-  const VERSION = '2026-10-v6';
+  const VERSION = '2026-10-v7';
   const LIMIT = 30;
   const MAX_ERRORS = 3;
   const GROUPS = {nonpolar:'Неполярная',polar:'Полярная незаряженная',acidic:'Кислая',basic:'Основная'};
@@ -14,7 +14,8 @@ var ExamCore = (() => {
     {id:'classification',title:'Классификация',forward:['classset'],reverse:['classset-reverse'],description:'Аминокислоты и группы боковых цепей'},
     {id:'formulas',title:'Формулы',forward:['formula'],reverse:['formula-reverse'],description:'Аминокислоты и молекулярные формулы'},
     {id:'structures',title:'Структуры',forward:['structure-reverse'],reverse:['structure'],description:'Аминокислоты и химические структуры'},
-    {id:'properties',title:'Свойства',forward:['property-forward','essential'],reverse:['property','essential-reverse'],description:'Особенности и незаменимость'}
+    {id:'properties',title:'Свойства',forward:['property-forward','essential'],reverse:['property','essential-reverse'],description:'Особенности и незаменимость'},
+    {id:'history',title:'История и этимология',forward:['history-forward'],reverse:['history'],description:'Происхождение названий и истории открытия'}
   ].map(t=>({...t,types:[...t.forward,...t.reverse],total:LIMIT}));
   const shuffle = (a, random=Math.random) => {
     const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;
@@ -24,6 +25,8 @@ var ExamCore = (() => {
   const property = a => `${a.feature}. Боковая цепь: ${a.side}.`;
   const image = a => a.structure;
   const SPECS = {
+    history:{text:'О какой аминокислоте этот факт?',prompt:a=>a.history.clue,value:a=>a.name,match:a=>a.history.clue},
+    'history-forward':{text:'Какой факт относится к этой аминокислоте?',prompt:a=>a.name,value:a=>a.history.clue},
     name:{text:'Какая аминокислота обозначается этим однобуквенным кодом?',prompt:a=>a.code,value:a=>a.name},
     'name-three':{text:'Какая аминокислота обозначается этим трёхбуквенным кодом?',prompt:a=>a.three,value:a=>a.name},
     code:{text:'Какой однобуквенный код у этой аминокислоты?',prompt:a=>a.name,value:a=>a.code},
@@ -40,6 +43,7 @@ var ExamCore = (() => {
     'essential-reverse':{text:'Какая из перечисленных аминокислот относится к этой категории для здорового взрослого?',prompt:essential,value:a=>a.name,match:essential}
   };
   function allowed(a,type){
+    if(['history','history-forward'].includes(type))return !!a.history?.clue;
     if(['codon','codon-reverse'].includes(type))return a.group!=='special'&&Array.isArray(a.codons)&&a.codons.length>0;
     return a.group!=='special'||!['classset','classset-reverse','essential','essential-reverse'].includes(type);
   }
@@ -66,6 +70,7 @@ var ExamCore = (() => {
     let alternatives=type==='essential'?['Незаменимая','Не входит в 9 незаменимых']:candidates.map(spec.value);
     alternatives=shuffle([...new Set(alternatives)].filter(v=>v!==correct),random).slice(0,type==='essential'?1:3);
     let explanation=`${a.name} · ${a.three} · ${a.code}. ${a.info}`;
+    if(['history','history-forward'].includes(type))explanation=a.history.story;
     if(type==='formula'||type==='formula-reverse'){
       const same=data.filter(other=>other.code!==a.code&&other.formula===a.formula);
       explanation=`${a.formula} — формула свободной аминокислоты. ${same.length?`Такую же формулу имеет ${same.map(x=>x.name.toLowerCase()).join(', ')}. `:''}${a.info}`;
@@ -98,7 +103,7 @@ var ExamCore = (() => {
     if(a.status==='failed'&&a.score===0&&Array.isArray(a.answers))return a.answers.filter(x=>x.feedback?.right===true).length;
     return a.score;
   }
-  function isCurrentAttempt(a){return ['2026-10-v3','2026-10-v4','2026-10-v5',VERSION].includes(a.version)&&TOPICS.some(t=>t.id===a.topic);}
+  function isCurrentAttempt(a){return ['2026-10-v3','2026-10-v4','2026-10-v5','2026-10-v6',VERSION].includes(a.version)&&TOPICS.some(t=>t.id===a.topic);}
   return {VERSION,LIMIT,MAX_ERRORS,TOPICS,question,allowed,build,publicQuestion,isCurrentAttempt,resultScore};
 })();
 if(typeof module!=='undefined'&&module.exports)module.exports=ExamCore;
