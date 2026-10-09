@@ -103,6 +103,10 @@
     "unsupported_locale": {
       "type": "string",
       "minLength": 1
+    },
+    "invalid_difficulty": {
+      "type": "string",
+      "minLength": 1
     }
   }
 }

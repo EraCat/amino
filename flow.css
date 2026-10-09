@@ -51,4 +51,8 @@
 .feedback{scroll-margin-bottom:110px}.answer-copy .pill{font-size:14px}.answer.correct .pill,.answer.wrong .pill{background:transparent;color:inherit;padding:0}
 
 /* Short, sourced stories in the amino acid reference and quiz feedback. */
+.difficulty-row{margin-block:18px}.difficulty-description,.text-answer-hint{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.difficulty-badge{display:inline-block;margin:8px 0;padding:5px 9px;border-radius:7px;background:var(--select-bg);color:var(--select);font-size:13px;font-weight:650}
+.text-answer-form{display:grid;gap:10px}.text-answer-form label{font-size:14px;font-weight:650}.text-answer-row{display:flex;gap:10px;align-items:stretch}.text-answer-row input{flex:1;min-width:0;width:100%;min-height:48px;border:1px solid #bac8da;border-radius:10px;padding:12px 14px;background:white;color:var(--ink);font:inherit;font-size:17px}.text-answer-row input:focus{outline:2px solid var(--select);outline-offset:2px}.text-answer-row .button{margin:0;flex-shrink:0}.text-answer-form.correct input{border-color:#66a879;background:#edf7ef}.text-answer-form.wrong input{border-color:#dc8186;background:#fff0f1}.text-answer-row input:disabled{opacity:1;-webkit-text-fill-color:var(--ink)}.text-answer-correct{overflow-wrap:anywhere}
+@media(max-width:700px){.text-answer-row{flex-direction:column}.text-answer-row .button{width:100%;min-height:48px}.difficulty-description,.text-answer-hint{font-size:13px}}
 .history-story{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}.history-story h2{font-size:20px}.history-story p{line-height:1.65}.history-sources{font-size:13px;line-height:1.6;overflow-wrap:anywhere}.history-sources a{color:var(--select);text-underline-offset:3px}

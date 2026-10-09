@@ -6,6 +6,7 @@ A mobile-friendly quiz for learning amino acid names, codes, properties, formula
 
 - Practice quizzes, mistake review, and reference cards for 22 amino acids.
 - Exams with saved results and a leaderboard.
+- Hard mode with typed names, codes, formulas and codons, and separate exam results and leaderboard.
 - English and Russian, with JSON translation files ready for additional languages.
 
 ## Run locally

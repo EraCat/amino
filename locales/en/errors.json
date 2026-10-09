@@ -23,5 +23,6 @@
   "page_not_found": "Page not found",
   "file_not_found": "File not found",
   "save_failed": "Unable to save data. Retry the request.",
-  "unsupported_locale": "This language is not available"
+  "unsupported_locale": "This language is not available",
+  "invalid_difficulty": "Unknown difficulty mode"
 }

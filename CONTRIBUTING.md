@@ -32,4 +32,8 @@ Preserve these distinctions: free amino acid versus residue, cysteine versus cys
 
 `npm run smoke:locales` uses temporary results, starts an isolated local server, and checks translated JSON delivery, both exam languages, answer grading, repeat requests, and resuming a legacy Russian attempt. It does not touch real participant results.
 
+`npm run smoke:hard` checks hard mode in both languages: typed answers, multiple valid names and codons, input validation, choice questions, repeat requests, saved difficulty, the three-error rule, and separate rankings. It also uses an isolated server and temporary results.
+
 Use `npm start` and check the UI in both languages, including mobile layout, the reference cards, help, a practice round, and an exam. The language selector is locked during an unfinished practice round or active exam. Progress and rankings are shared across languages; stored exam questions keep their original language and answer order.
+
+Hard mode replaces short textual choices with an input. Names accept the localized name, the shared English name, and the legacy Russian name; codes must use their own format. Case, repeated whitespace, and Russian е/ё are ignored. Formula subscripts are normalized to digits. Where a prompt has several valid answers, any matching amino acid or mRNA codon is accepted. Image choices and descriptive answers remain multiple choice. Existing attempts without a difficulty field belong to normal mode.

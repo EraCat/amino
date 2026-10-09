@@ -7,7 +7,8 @@
     "check:locales": "node scripts/validate-locales.mjs",
     "check:js": "node --check bootstrap.js && node --check app.js && node --check exam-ui.js && node --check exam-core.js && node --check server.mjs && node --check localization.mjs",
     "schemas:locales": "node scripts/generate-locale-schemas.mjs",
-    "smoke:locales": "node scripts/smoke-localization.mjs"
+    "smoke:locales": "node scripts/smoke-localization.mjs",
+    "smoke:hard": "node scripts/smoke-hard-mode.mjs"
   },
   "engines": { "node": ">=22" }
 }

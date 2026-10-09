@@ -23,5 +23,6 @@
   "page_not_found": "Страница не найдена",
   "file_not_found": "Файл не найден",
   "save_failed": "Не удалось сохранить данные. Повторите запрос.",
-  "unsupported_locale": "Язык недоступен"
+  "unsupported_locale": "Язык недоступен",
+  "invalid_difficulty": "Неизвестный режим сложности"
 }

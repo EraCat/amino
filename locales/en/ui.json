@@ -13,7 +13,7 @@
   },
   "meta": {
     "title": "amino — amino acids",
-    "description": "Learn amino-acid names, codes, properties, molecular formulas, and structures with short quizzes and mistake review."
+    "description": "Learn amino-acid names, codes, properties, and structures with short quizzes and mistake review."
   },
   "common": {
     "close": "Close",
@@ -66,12 +66,27 @@
   "modes": {
     "mix": "All topics",
     "names": "Names and codes",
-    "codons": "Genetic code",
     "class": "Classification",
-    "formula": "Formulas",
     "structure": "Structures",
     "properties": "Properties",
     "history": "History and etymology"
+  },
+  "difficulty": {
+    "label": "Difficulty",
+    "normal": "Normal",
+    "hard": "Hard mode",
+    "hardPassed": "Exam passed in hard mode",
+    "description": "In hard mode, type names and codes from memory. Structures and long descriptions still use answer choices.",
+    "inputLabel": "Your answer",
+    "submit": "Check answer",
+    "hint": "Case and extra spaces are ignored.",
+    "nameHint": "Names can be entered in English or Russian.",
+    "placeholder": {
+      "name": "Amino acid name",
+      "code": "One-letter code",
+      "three": "Three-letter code"
+    },
+    "rankingNote": "Normal and hard mode results are tracked separately."
   },
   "practice": {
     "title": "Practice",
@@ -97,19 +112,15 @@
     "roundProgress": "Round progress",
     "topicLabels": {
       "structure": "STRUCTURE",
-      "formula": "MOLECULAR FORMULA",
       "class": "CLASSIFICATION",
       "properties": "PROPERTIES",
-      "codons": "GENETIC CODE",
       "history": "HISTORY AND ETYMOLOGY",
       "names": "NAMES AND CODES"
     },
     "structureNote": "Neutral form of the free amino acid",
     "classNote": "Side-chain properties at pH ≈ 7",
-    "codonNote": "mRNA · 5′ → 3′ · standard genetic code",
     "percentCorrect": "{percent}% correct",
     "anotherRound": "Another round",
-    "codon": "Codon: {codon}",
     "yourAnswer": "Your answer:",
     "correctWas": "Correct:",
     "finishTitle": "Finish this round?",
@@ -128,13 +139,9 @@
     "nothing": "Nothing found.",
     "structureAlt": "Structure: {name}",
     "structureOptionAlt": "Structure option {number}",
-    "structureFormulaAlt": "Structural formula: {name}",
     "groupsSummary": "Groups and overlaps",
     "groupsNote": "His has an aromatic ring and a basic side chain. Gly and Pro are classified as nonpolar.",
     "historyTitle": "History and etymology",
-    "codons": "mRNA codons · 5′ → 3′",
-    "standardCode": "Standard genetic code.",
-    "formula": "Molecular formula",
     "side": "R side chain",
     "feature": "Feature",
     "diet": "In an adult diet",
@@ -165,21 +172,18 @@
     "classificationTitle": "Classification",
     "classification1": "By side-chain properties: nonpolar (G, A, V, L, I, M, P, F, W), polar uncharged (S, T, C, Y, N, Q), acidic (D, E), and basic (K, R, H). Aromatic ring: F, W, Y, H. Traditional teaching groups often list only F, W, and Y as aromatic. Hydrophobic aliphatic: A, V, L, I, M. Gly and Pro are singled out for their structural features.",
     "classification2": "Classifications vary among textbooks, especially for C, Y, and W. Histidine is basic, although its side chain is mostly neutral near pH 7. The quiz does not ask about a standard group or dietary essentiality for Sec and Pyl.",
-    "geneticTitle": "Genetic code",
-    "genetic": "mRNA codons are written 5′ to 3′ and determine amino acids during protein synthesis. The corresponding coding-strand DNA triplets contain T instead of U. This topic uses the standard genetic code for 20 amino acids; several codons may encode one amino acid. UAA, UAG, and UGA are stop codons. Sec and Pyl are incorporated when UGA and UAG receive special interpretation, so they are excluded from this topic. Mitochondrial and other genetic-code variants are not covered.",
-    "formulaTitle": "Formulas and structures",
-    "formula": "The formulas describe free amino acids rather than residues in proteins. Images show neutral L forms (glycine is achiral) with stereochemistry. They are 2D structures, not the spatial shape of a protein. Leucine and isoleucine have the same molecular formula.",
     "historyTitle": "History and etymology",
     "history": "Name origins and discovery stories are included for all 22 amino acids. Practice works in both directions: amino acid to fact and fact to amino acid. Sources appear on cards and after answers.",
     "sourcesTitle": "Sources",
     "stored": "Progress is stored in this browser.",
-    "sourceGenetic": "NCBI · standard genetic code",
     "sourceClassification": "Wikipedia · amino-acid classification",
     "sourceProperties": "Wikipedia · side-chain properties and codes",
     "sourceCells": "NCBI · The Molecular Composition of Cells",
     "sourceEssential": "NCBI · Essential Amino Acids",
     "sourceHistidine": "NCBI · Histidine, aromaticity, and properties",
-    "sourcePubchem": "PubChem · formulas and chemical structures"
+    "sourcePubchem": "PubChem · chemical structures",
+    "structuresTitle": "Structures",
+    "structures": "Images show neutral L forms of free amino acids (glycine is achiral) with stereochemistry. They are 2D structures, not the spatial shape of a protein."
   },
   "exam": {
     "title": "Exams",
@@ -248,6 +252,9 @@
   },
   "ranking": {
     "title": "Leaderboard",
+    "hardTitle": "Expert leaderboard",
+    "hardPassedCount": "Exams passed in hard mode: {count}",
+    "hardLegend": "Gold shield — exam passed in hard mode",
     "bestSum": "Sum of the best topic results",
     "totalLabel": "Total score: {total}",
     "passed": "Topic exam passed",

@@ -61,3 +61,19 @@
   .ranking-topic{gap:10px}
 }
 @media(prefers-reduced-motion:reduce){.ranking-chevron{transition:none}}
+
+/* A shield distinguishes hard mode; a filled gold shield marks a passed exam. */
+.hard-mode-badge{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border:1px solid #d4dce6;border-radius:10px;background:#f3f5f8;color:#657183;font-size:13px;font-weight:650;line-height:1.4;vertical-align:middle}
+.hard-mode-icon{display:block;width:22px;height:26px;flex-shrink:0;overflow:visible}.hard-shield{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round}.hard-star{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linejoin:round}
+.hard-mode-badge.is-earned{background:#fff3d3;border-color:#d8b968;color:#785416}.hard-mode-badge.is-earned .hard-shield{fill:#eabb4b;stroke:#946817}.hard-mode-badge.is-earned .hard-star{fill:#fff8e6;stroke:#805915;stroke-width:1.1}
+.hard-mode-badge.is-compact{padding:0;border:0;background:transparent;flex-shrink:0}.hard-mode-badge.is-compact .hard-mode-icon{width:19px;height:23px}
+.ranking-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding:5px;border:1px solid var(--line);border-radius:14px;background:#eff3f8}
+.ranking-categories button{display:flex;align-items:center;justify-content:center;gap:10px;min-width:0;min-height:52px;padding:10px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--muted);font:inherit;font-size:15px;font-weight:650}
+.ranking-categories button>svg:not(.hard-mode-icon){fill:none;stroke:currentColor;stroke-width:1.6;flex-shrink:0}.ranking-categories button[aria-pressed="true"]{background:white;color:var(--select);border-color:#d9e4f3;box-shadow:0 1px 4px #26334312}
+.ranking-categories .ranking-hard-category[aria-pressed="true"]{background:#fff3d3;color:#785416;border-color:#d8b968}.ranking-hard-category[aria-pressed="true"] .hard-shield{fill:#eabb4b;stroke:#946817}.ranking-hard-category[aria-pressed="true"] .hard-star{fill:#fff8e6;stroke:#805915;stroke-width:1.1}
+.ranking-categories button:hover:not([aria-pressed="true"]){background:#e5edf7}.ranking-categories button:focus-visible{outline:2px solid var(--select);outline-offset:2px}
+.ranking-entry.is-hard{border-color:#e2cfaa;border-left:4px solid #d7ad51}.ranking-entry.is-hard.is-me{background:#fffbf3}
+.ranking-identity{display:flex;align-items:center;gap:8px;min-width:0}.ranking-topic-mark{display:grid;place-items:center;width:22px;flex-shrink:0}
+.ranking-toolbar .ranking-hard-legend{display:flex;align-items:center;gap:8px;margin-top:8px;color:#785416;font-size:12px;line-height:1.5}
+.exam-result.is-hard .result-header>.hard-mode-badge{margin-top:8px}.exam-result.is-hard .result-header.passed{padding:20px 14px;border:1px solid #e2cfaa;border-radius:18px;background:linear-gradient(135deg,#fff9e9,#fffdf8)}
+@media(max-width:700px){.ranking-categories button{min-height:48px;font-size:14px;gap:8px}.ranking-toolbar .ranking-hard-legend{align-items:flex-start}.ranking-hard-legend .hard-mode-badge{margin-top:1px}.ranking-identity{gap:6px}}
