@@ -280,78 +280,6 @@
         }
       }
     },
-    "difficulty": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "label": {
-          "type": "string",
-          "minLength": 1
-        },
-        "normal": {
-          "type": "string",
-          "minLength": 1
-        },
-        "hard": {
-          "type": "string",
-          "minLength": 1
-        },
-        "hardPassed": {
-          "type": "string",
-          "minLength": 1
-        },
-        "description": {
-          "type": "string",
-          "minLength": 1
-        },
-        "inputLabel": {
-          "type": "string",
-          "minLength": 1
-        },
-        "submit": {
-          "type": "string",
-          "minLength": 1
-        },
-        "hint": {
-          "type": "string",
-          "minLength": 1
-        },
-        "nameHint": {
-          "type": "string",
-          "minLength": 1
-        },
-        "placeholder": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "name": {
-              "type": "string",
-              "minLength": 1
-            },
-            "code": {
-              "type": "string",
-              "minLength": 1
-            },
-            "three": {
-              "type": "string",
-              "minLength": 1
-            },
-            "formula": {
-              "type": "string",
-              "minLength": 1
-            },
-            "codon": {
-              "type": "string",
-              "minLength": 1
-            }
-          }
-        },
-        "rankingNote": {
-          "type": "string",
-          "minLength": 1
-        }
-      }
-    },
     "practice": {
       "type": "object",
       "additionalProperties": false,
@@ -771,6 +699,14 @@
         "sourcePubchem": {
           "type": "string",
           "minLength": 1
+        },
+        "structuresTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structures": {
+          "type": "string",
+          "minLength": 1
         }
       }
     },
@@ -1048,18 +984,6 @@
           "type": "string",
           "minLength": 1
         },
-        "hardTitle": {
-          "type": "string",
-          "minLength": 1
-        },
-        "hardPassedCount": {
-          "type": "string",
-          "minLength": 1
-        },
-        "hardLegend": {
-          "type": "string",
-          "minLength": 1
-        },
         "bestSum": {
           "type": "string",
           "minLength": 1
@@ -1101,6 +1025,90 @@
           "minLength": 1
         },
         "historyUnavailable": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hardTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hardPassedCount": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hardLegend": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "difficulty": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "normal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hard": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hardPassed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "inputLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "submit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nameHint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "placeholder": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "code": {
+              "type": "string",
+              "minLength": 1
+            },
+            "three": {
+              "type": "string",
+              "minLength": 1
+            },
+            "formula": {
+              "type": "string",
+              "minLength": 1
+            },
+            "codon": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "rankingNote": {
           "type": "string",
           "minLength": 1
         }

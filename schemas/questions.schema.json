@@ -242,64 +242,6 @@
         }
       }
     },
-    "inputText": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "history": {
-          "type": "string",
-          "minLength": 1
-        },
-        "name": {
-          "type": "string",
-          "minLength": 1
-        },
-        "name-three": {
-          "type": "string",
-          "minLength": 1
-        },
-        "code": {
-          "type": "string",
-          "minLength": 1
-        },
-        "three": {
-          "type": "string",
-          "minLength": 1
-        },
-        "classset-reverse": {
-          "type": "string",
-          "minLength": 1
-        },
-        "formula": {
-          "type": "string",
-          "minLength": 1
-        },
-        "formula-reverse": {
-          "type": "string",
-          "minLength": 1
-        },
-        "structure": {
-          "type": "string",
-          "minLength": 1
-        },
-        "property": {
-          "type": "string",
-          "minLength": 1
-        },
-        "essential-reverse": {
-          "type": "string",
-          "minLength": 1
-        },
-        "codon": {
-          "type": "string",
-          "minLength": 1
-        },
-        "codon-reverse": {
-          "type": "string",
-          "minLength": 1
-        }
-      }
-    },
     "essential": {
       "type": "object",
       "additionalProperties": false,
@@ -333,6 +275,64 @@
     "codonExplanation": {
       "type": "string",
       "minLength": 1
+    },
+    "inputText": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "history": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name-three": {
+          "type": "string",
+          "minLength": 1
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "three": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classset-reverse": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "property": {
+          "type": "string",
+          "minLength": 1
+        },
+        "essential-reverse": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formula": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formula-reverse": {
+          "type": "string",
+          "minLength": 1
+        },
+        "codon": {
+          "type": "string",
+          "minLength": 1
+        },
+        "codon-reverse": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
     }
   }
 }

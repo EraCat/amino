@@ -37,13 +37,12 @@ function safeName(value){
   return name;
 }
 function expired(next){let changed=false;for(const a of next.attempts){if(a.status==='running'&&(Date.now()>a.expiresAt||!Core.isCurrentAttempt(a))){a.status='unfinished';a.finishedAt=Math.min(Date.now(),a.expiresAt);changed=true;}}return changed;}
-const visibleAttempt=a=>Core.TOPICS.some(topic=>topic.id===a.topic)||['names','codes'].includes(a.topic);
 function expose(a){return {id:a.id,participantId:a.participantId,name:a.name,topic:a.topic,difficulty:a.difficulty||'normal',version:a.version,locale:a.locale||'ru',contentRevision:a.contentRevision||null,total:a.questions.length,answered:a.cursor,score:Core.resultScore(a),errors:a.errors,status:a.status,startedAt:a.startedAt,finishedAt:a.finishedAt||null,expiresAt:a.expiresAt};}
 function live(a){return {...expose(a),question:a.status==='running'?Core.publicQuestion(a.questions[a.cursor],a.cursor):null};}
-function getAttempt(next,id,hash){const p=next.participants.find(p=>p.tokenHash===hash),a=next.attempts.find(a=>a.id===id&&visibleAttempt(a));if(!p||!a||a.participantId!==p.id)fail('attempt_not_found',404);return a;}
+function getAttempt(next,id,hash){const p=next.participants.find(p=>p.tokenHash===hash),a=next.attempts.find(a=>a.id===id);if(!p||!a||a.participantId!==p.id)fail('attempt_not_found',404);return a;}
 function leaderboard(next,difficulty='normal'){
   const inMode=a=>(a.difficulty||'normal')===difficulty;
-  const rows=next.participants.filter(p=>next.attempts.some(a=>a.participantId===p.id&&visibleAttempt(a)&&inMode(a))).map(p=>{
+  const rows=next.participants.filter(p=>next.attempts.some(a=>a.participantId===p.id&&inMode(a))).map(p=>{
     const attempts=next.attempts.filter(a=>a.participantId===p.id&&Core.isCurrentAttempt(a)&&inMode(a));
     const results=Object.fromEntries(Core.TOPICS.map(t=>{
       const list=attempts.filter(a=>a.topic===t.id),finished=list.filter(a=>a.status==='passed'||a.status==='failed');
@@ -86,7 +85,7 @@ const server=http.createServer(async(req,res)=>{
         }
         else if(route==='/api/me'&&req.method==='GET'){
           const hash=identity(req,false),p=next.participants.find(p=>p.tokenHash===hash);
-          reply={participant:p?{id:p.id,name:p.name}:null,attempts:p?next.attempts.filter(a=>a.participantId===p.id&&visibleAttempt(a)).map(expose).sort((a,b)=>b.startedAt-a.startedAt):[],topics:topicsFor(locale)};
+          reply={participant:p?{id:p.id,name:p.name}:null,attempts:p?next.attempts.filter(a=>a.participantId===p.id).map(expose).sort((a,b)=>b.startedAt-a.startedAt):[],topics:topicsFor(locale)};
         }
         else if(route==='/api/start'&&req.method==='POST'){
           const hash=identity(req),name=safeName(input.name),topic=Core.TOPICS.find(t=>t.id===input.topic);
@@ -130,10 +129,10 @@ const server=http.createServer(async(req,res)=>{
           const a=getAttempt(next,input.attemptId,identity(req));if(a.status==='running'){a.status='unfinished';a.finishedAt=Date.now();changed=true;}reply=live(a);
         }
         else if(route==='/api/result'&&req.method==='GET'){
-          const a=next.attempts.find(a=>a.id===url.searchParams.get('id')&&visibleAttempt(a));if(!a)fail('result_not_found',404);reply=expose(a);
+          const a=next.attempts.find(a=>a.id===url.searchParams.get('id'));if(!a)fail('result_not_found',404);reply=expose(a);
         }
         else if(route==='/api/history'&&req.method==='GET'){
-          reply={attempts:next.attempts.filter(a=>a.participantId===url.searchParams.get('participant')&&visibleAttempt(a)).sort((a,b)=>b.startedAt-a.startedAt).slice(0,100).map(expose)};
+          reply={attempts:next.attempts.filter(a=>a.participantId===url.searchParams.get('participant')).sort((a,b)=>b.startedAt-a.startedAt).slice(0,100).map(expose)};
         }
         else fail('route_not_found',404);
         if(changed)await commit(next);return reply;

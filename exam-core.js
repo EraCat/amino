@@ -1,6 +1,6 @@
 /* Shared semantic questions for practice and exams. Text is supplied by locale JSON. */
 var ExamCore = (() => {
-  const VERSION = '2026-10-v9';
+  const VERSION = '2026-10-v8';
   const LIMIT = 30;
   const MAX_ERRORS = 3;
   const AXES = [
@@ -9,7 +9,9 @@ var ExamCore = (() => {
   ];
   const TOPICS = [
     {id:'names-codes',forward:['code','three'],reverse:['name','name-three']},
+    {id:'codons',forward:['codon'],reverse:['codon-reverse']},
     {id:'classification',forward:['classset'],reverse:['classset-reverse']},
+    {id:'formulas',forward:['formula'],reverse:['formula-reverse']},
     {id:'structures',forward:['structure-reverse'],reverse:['structure']},
     {id:'properties',forward:['property-forward','essential'],reverse:['property','essential-reverse']},
     {id:'history',forward:['history-forward'],reverse:['history']}
@@ -35,6 +37,8 @@ var ExamCore = (() => {
     three:{prompt:a=>a.name,value:a=>a.three,id:a=>'three:'+a.three},
     classset:{prompt:a=>a.name,value:classification,id:classificationId},
     'classset-reverse':{prompt:classification,value:a=>a.name,id:aminoId,match:classificationId},
+    formula:{prompt:a=>a.name,value:a=>a.formula,id:a=>'formula:'+a.formula},
+    'formula-reverse':{prompt:a=>a.formula,value:a=>a.name,id:aminoId,match:a=>a.formula},
     structure:{prompt:a=>a.structure,value:a=>a.name,id:aminoId},
     'structure-reverse':{prompt:a=>a.name,value:a=>a.structure,id:a=>'structure:'+a.code},
     property:{prompt:property,value:a=>a.name,id:aminoId,match:propertyId},
@@ -43,8 +47,8 @@ var ExamCore = (() => {
     'essential-reverse':{prompt:essential,value:a=>a.name,id:aminoId,match:a=>Boolean(a.essential)}
   };
   const INPUT_KINDS = Object.fromEntries([
-    ...['name','name-three','history','structure','classset-reverse','property','essential-reverse'].map(type=>[type,'name']),
-    ...['code','three'].map(type=>[type,type])
+    ...['name','name-three','history','structure','formula-reverse','codon-reverse','classset-reverse','property','essential-reverse'].map(type=>[type,'name']),
+    ...['code','three','formula','codon'].map(type=>[type,type])
   ]);
   const normalizeAnswer = value => String(value??'').normalize('NFKC').trim().replace(/\s+/gu,' ').toLowerCase().replace(/ё/g,'е');
   function withDifficulty(data,q,difficulty='normal'){
@@ -53,14 +57,14 @@ var ExamCore = (() => {
     const a=data.find(item=>item.code===q.code),spec=SPECS[q.type];
     // A classification or dietary category can describe several amino acids.
     const matching=answerKind==='name'?data.filter(other=>allowed(other,q.type)&&(spec?.match?spec.match(other)===spec.match(a):other.code===a.code)):[];
-    const values=answerKind==='name'?matching.flatMap(other=>[other.name,other.englishName,other.legacyName]):[q.correct];
+    const values=answerKind==='name'?matching.flatMap(other=>[other.name,other.englishName,other.legacyName]):answerKind==='codon'?a.codons:[q.correct];
     return {...q,answerMode:'text',answerKind,text:dictionary(a).inputText[q.type],
       acceptedAnswers:[...new Set(values.filter(Boolean).map(normalizeAnswer))]};
   }
   function checkTextAnswer(q,value){return q.answerMode==='text'&&typeof value==='string'&&q.acceptedAnswers.includes(normalizeAnswer(value));}
   function allowed(a,type){
     if(['history','history-forward'].includes(type))return !!a.history?.clue;
-    if(!Object.hasOwn(SPECS,type))return false;
+    if(['codon','codon-reverse'].includes(type))return a.group!=='special'&&Array.isArray(a.codons)&&a.codons.length>0;
     return a.group!=='special'||!['classset','classset-reverse','essential','essential-reverse'].includes(type);
   }
   function options(correct,candidates,count,random){
@@ -74,13 +78,30 @@ var ExamCore = (() => {
     const all=shuffle([correct,...alternatives],random);
     return {choices:all.map(x=>x.label),choiceIds:all.map(x=>x.id),correct:correct.label,correctId:correct.id};
   }
-  function question(data,a,type,random=Math.random){
+  function codonQuestion(data,a,type,random,forcedCodon){
+    if(!allowed(a,type))throw Error('Invalid question type');
+    const codon=forcedCodon===undefined?a.codons[Math.floor(random()*a.codons.length)]:forcedCodon;
+    if(!a.codons.includes(codon))throw Error('Codon does not belong to this amino acid');
+    const others=data.filter(other=>allowed(other,type)&&other.code!==a.code);
+    const reverse=type==='codon-reverse';
+    const correct=reverse?{id:aminoId(a),label:a.name}:{id:'codon:'+codon,label:codon};
+    const candidates=reverse?others.map(other=>({id:aminoId(other),label:other.name})):others.flatMap(other=>other.codons).filter(c=>!a.codons.includes(c)).map(c=>({id:'codon:'+c,label:c}));
+    const q=dictionary(a);
+    return {code:a.code,type,locale:a._locale,text:q.text[type],prompt:reverse?codon:a.name,
+      ...options(correct,candidates,3,random),explanation:format(q.codonExplanation,{name:a.name,codons:a.codons.join(', ')})};
+  }
+  function question(data,a,type,random=Math.random,forcedCodon){
+    if(['codon','codon-reverse'].includes(type))return codonQuestion(data,a,type,random,forcedCodon);
     const spec=SPECS[type];if(!spec||!allowed(a,type))throw Error('Invalid question type');
     const q=dictionary(a),correct={id:spec.id(a),label:spec.value(a)};
     const candidates=data.filter(other=>allowed(other,type)&&(!spec.match||spec.match(other)!==spec.match(a)));
     const alternatives=type==='essential'?[{id:'essential:true',label:q.essential.yes},{id:'essential:false',label:q.essential.no}]:candidates.map(other=>({id:spec.id(other),label:spec.value(other)}));
     let explanation=format(q.explanation,a);
     if(['history','history-forward'].includes(type))explanation=a.history.story;
+    if(type==='formula'||type==='formula-reverse'){
+      const same=data.filter(other=>other.code!==a.code&&other.formula===a.formula);
+      explanation=format(q.formulaExplanation,{...a,same:same.length?format(q.sameFormula,{names:same.map(x=>x.name).join(', ')}):''});
+    }
     return {code:a.code,type,locale:a._locale,text:q.text[type],prompt:spec.prompt(a),
       ...options(correct,alternatives,type==='essential'?1:3,random),explanation};
   }
@@ -114,7 +135,7 @@ var ExamCore = (() => {
     if(a.status==='failed'&&a.score===0&&Array.isArray(a.answers))return a.answers.filter(x=>x.feedback?.right===true).length;
     return a.score;
   }
-  function isCurrentAttempt(a){return ['2026-10-v3','2026-10-v4','2026-10-v5','2026-10-v6','2026-10-v7','2026-10-v8',VERSION].includes(a.version)&&TOPICS.some(t=>t.id===a.topic);}
+  function isCurrentAttempt(a){return ['2026-10-v3','2026-10-v4','2026-10-v5','2026-10-v6','2026-10-v7',VERSION].includes(a.version)&&TOPICS.some(t=>t.id===a.topic);}
   return {VERSION,LIMIT,MAX_ERRORS,TOPICS,question,allowed,build,withDifficulty,normalizeAnswer,checkTextAnswer,publicQuestion,isCurrentAttempt,resultScore};
 })();
 if(typeof module!=='undefined'&&module.exports)module.exports=ExamCore;
