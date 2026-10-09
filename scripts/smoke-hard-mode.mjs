@@ -9,22 +9,36 @@ import {loadLocalization,ROOT} from '../localization.mjs';
 import Core from '../exam-core.js';
 
 const localization=await loadLocalization(),directory=await mkdtemp(path.join(tmpdir(),'amino-hard-mode-'));
-const participants=[],attempts=[],fixtures=[];
+const participants=[],attempts=[],fixtures=[],classificationRejections=[];
 // Known ambiguous prompts ensure grading accepts answers beyond the generated target.
 for(const locale of ['ru','en']){
   const data=localization.packs.get(locale).data,byCode=code=>data.find(a=>a.code===code);
   const token=(locale==='ru'?'a':'b').repeat(64),participantId=randomUUID();
   participants.push({id:participantId,name:locale,tokenHash:createHash('sha256').update(token).digest('hex')});
   const pairs=[['D','classset-reverse','E'],['V','essential-reverse','K'],
+    ...['A','V','L','I','M'].map(code=>['A','classset-reverse',code]),
+    ['S','classset-reverse','Y'],['G','classset-reverse','F'],['V','classset-reverse','L'],
     ['A','name'],['A','code'],['A','three'],['A','structure'],
     ['A','property'],['A','history'],['N','name-three'],
-    ['A','structure-reverse'],['A','classset'],['A','history-forward'],['A','property-forward'],['A','essential']];
+    ['A','structure-reverse'],['A','classset'],['A','history-forward'],['A','property-forward'],['A','essential'],
+    ['N','code-pair'],['Q','code-link'],['Y','category'],['H','class-image'],
+    ['I','structure-match'],['L','sidechain'],['C','property-image'],['G','history-code']];
   const questions=pairs.map(([code,type])=>Core.withDifficulty(data,Core.question(data,byCode(code),type),'hard'));
+  // Reproduce saved questions from before subset matching, then exercise migration.
+  for(const q of questions.filter(q=>q.type==='classset-reverse')){
+    delete q.classificationRule;
+    q.acceptedAnswers=[Core.normalizeAnswer(byCode(q.code).name)];
+  }
   const values=pairs.map(([code,type,alternative],index)=>alternative?byCode(alternative).name:
     type==='name'?(locale==='ru'?byCode(code).englishName:byCode(code).legacyName):questions[index].correct);
   const attempt={id:randomUUID(),participantId,name:locale,requestId:randomUUID(),topic:'names-codes',difficulty:'hard',locale,
     version:'2026-10-v8',questions,cursor:0,score:0,errors:0,status:'running',startedAt:Date.now(),expiresAt:Date.now()+3600000,answers:[]};
   attempts.push(attempt);fixtures.push({locale,token,attempt,values});
+  const rejectionToken=(locale==='ru'?'c':'d').repeat(64),rejectionId=randomUUID();
+  participants.push({id:rejectionId,name:'Classification '+locale,tokenHash:createHash('sha256').update(rejectionToken).digest('hex')});
+  const rejection={...attempt,id:randomUUID(),participantId:rejectionId,requestId:randomUUID(),topic:'classification',
+    questions:['A','V','S'].map(code=>Core.withDifficulty(data,Core.question(data,byCode(code),'classset-reverse'),'hard'))};
+  attempts.push(rejection);classificationRejections.push({token:rejectionToken,attempt:rejection,answers:['S','A','C'].map(code=>byCode(code).name)});
 }
 await writeFile(path.join(directory,'leaderboard.json'),JSON.stringify({schema:1,participants,attempts}));
 let child,output='';
@@ -42,11 +56,20 @@ try{
     const value=await response.json();assert.equal(response.status,status,`${route}: ${JSON.stringify(value)}`);return value;
   };
   const publicCheck=q=>{
-    for(const key of ['correct','correctId','choiceIds','acceptedAnswers','code'])assert.equal(Object.hasOwn(q,key),false,`Answer leaked: ${key}`);
+    for(const key of ['correct','correctId','choiceIds','acceptedAnswers','code','contrasts'])assert.equal(Object.hasOwn(q,key),false,`Answer leaked: ${key}`);
     if(q.answerMode==='text')assert.equal(Object.hasOwn(q,'choices'),false);
     else assert.ok(Array.isArray(q.choices));
   };
   const storedAttempt=async id=>JSON.parse(await readFile(path.join(directory,'leaderboard.json'),'utf8')).attempts.find(a=>a.id===id);
+  const variantFiles=[...new Set([...localization.packs.get('ru').data.flatMap(a=>Object.values(a.structureVariants))])];
+  let assetBytes=0;
+  for(const file of variantFiles){
+    const response=await fetch(new URL(file,origin));assert.equal(response.status,200,file);
+    assert.ok(response.headers.get('content-type').startsWith('image/svg+xml'));
+    const svg=await response.text();assetBytes+=Buffer.byteLength(svg);assert.ok(svg.includes('<svg'),file);
+    assert.ok(!/<script|<foreignObject|\bon\w+\s*=|(?:href\s*=\s*["']|url\(\s*["']?)(?:https?:|\/\/|data:|javascript:)/i.test(svg),`Active or external SVG content: ${file}`);
+    assert.ok(Buffer.byteLength(svg)<100000,`Oversized mobile asset: ${file}`);
+  }
   for(const {locale,token,attempt,values} of fixtures){
     let current=await request('attempt?id='+attempt.id,token);
     for(let index=0;index<attempt.questions.length;index++){
@@ -57,6 +80,7 @@ try{
         for(const invalid of [{answer:'   '},{answer:7},{answer:'x'.repeat(121)},{choice:0}])await request('answer',token,{attemptId:attempt.id,index,...invalid},400);
       }
       const response=await request('answer',token,body);assert.equal(response.feedback.right,true,`${locale}/${q.type}`);
+      if(q.type==='classset-reverse')assert.ok(response.feedback.explanation.includes(values[index]),'Feedback must list the accepted alternative');
       assert.equal(response.attempt.score,index+1);
       if(index===0){
         assert.deepEqual(await request('answer',token,{...body,answer:values[index].toLowerCase()}),response);
@@ -82,10 +106,15 @@ try{
       else await request('abandon',token,{attemptId:start.id});
     }
     const failed=await request('start',token,{topic:'names-codes',name:'Hard smoke',locale,difficulty:'hard',requestId:randomUUID()});
-    let last;
-    for(let index=0;index<3;index++)last=await request('answer',token,{attemptId:failed.id,index,answer:'wrong'});
+    let last,lastBody;
+    const failedQuestions=(await storedAttempt(failed.id)).questions;
+    for(let index=0;index<3;index++){
+      const q=failedQuestions[index];
+      lastBody={attemptId:failed.id,index,...(q.answerMode==='text'?{answer:'wrong'}:{choice:q.choiceIds.findIndex(id=>id!==q.correctId)})};
+      last=await request('answer',token,lastBody);
+    }
     assert.equal(last.attempt.status,'failed');assert.equal(last.attempt.errors,3);assert.equal(last.attempt.score,0);
-    assert.deepEqual(await request('answer',token,{attemptId:failed.id,index:2,answer:'wrong'}),last);
+    assert.deepEqual(await request('answer',token,lastBody),last);
     const hard=await request('leaderboard?difficulty=hard',token),normal=await request('leaderboard',token);
     assert.equal(hard.rows.find(row=>row.id===attempt.participantId).total,30);
     assert.equal(normal.rows.some(row=>row.id===attempt.participantId),false);
@@ -94,9 +123,16 @@ try{
     await request('abandon',token,{attemptId:legacyDefault.id});
     const normalAfter=await request('leaderboard',token);assert.equal(normalAfter.rows.find(row=>row.id===attempt.participantId).total,0);
   }
+  for(const {token,attempt,answers} of classificationRejections){
+    for(let index=0;index<answers.length;index++){
+      const response=await request('answer',token,{attemptId:attempt.id,index,answer:answers[index]});
+      assert.equal(response.feedback.right,false,'Missing a required classification property must be rejected');
+      assert.equal(response.attempt.errors,index+1);
+    }
+  }
   await request('leaderboard?difficulty=unknown',fixtures[0].token,undefined,400);
   await request('start',fixtures[0].token,{topic:'names-codes',name:'Smoke',difficulty:'unknown',requestId:randomUUID()},400);
-  console.log('Hard mode HTTP smoke passed: RU/EN, all topics, typed/choice grading, alternatives, input validation, retries, resume, failure rule and separate rankings.');
+  console.log(`Hard mode HTTP smoke passed: RU/EN, all question formats, typed/choice grading, alternatives, input validation, retries, resume, failure rule, separate rankings; ${variantFiles.length} static SVG variants (${Math.round(assetBytes/1024)} KiB total).`);
 }finally{
   if(child?.pid){const exited=child.exitCode!==null?Promise.resolve():once(child,'exit');child.kill();await exited;}
   await rm(directory,{recursive:true,force:true});

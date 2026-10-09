@@ -88,13 +88,13 @@ export function validateCard(card,shared,source,label,{complete=true}={}){
   }
 }
 
-export function mergeCard(shared,card,questions,locale){
-  return {...shared,...card,en:shared.englishName,side:card.sideLabel||shared.side,
+export function mergeCard(shared,card,questions,locale,structureVariants){
+  return {...shared,...card,structureVariants,en:shared.englishName,side:card.sideLabel||shared.side,
     history:{...card.history,sources:shared.sources},_questions:questions,_locale:locale};
 }
 
 export async function loadLocalization({includeDrafts=false}={}){
-  const [core,languages]=await Promise.all([readJson('content/amino/core.json'),readJson('locales/languages.json')]);
+  const [core,languages,structures]=await Promise.all([readJson('content/amino/core.json'),readJson('locales/languages.json'),readJson('content/structures.json')]);
   assert(Array.isArray(core)&&core.length===22,'core: expected 22 amino acids');
   assert(new Set(core.map(a=>a.code)).size===core.length,'core: duplicate amino acid codes');
   assert(core.filter(a=>a.group!=='special').length===20,'core: expected 20 standard amino acids');
@@ -114,12 +114,22 @@ export async function loadLocalization({includeDrafts=false}={}){
   }
   assert(new Set(core.map(a=>a.englishName)).size===core.length,'core: duplicate English names');
   await Promise.all(core.map(a=>access(path.join(ROOT,a.structure))));
+  assert(structures.version===1&&object(structures.molecules),'structures: invalid manifest');
+  assert(Object.keys(structures.molecules).length===core.length,'structures: expected 22 molecules');
+  for(const a of core){
+    const variants=structures.molecules[a.code],required=['skeletal','rotated','explicit','ball','ball-alt'];
+    assert(object(variants)&&required.every(key=>typeof variants[key]==='string'),'structures: missing variants for '+a.code);
+    for(const [style,file] of Object.entries(variants)){
+      assert([...required,'side'].includes(style)&&/^structures\/variants\/[a-f0-9]+\.svg$/.test(file),'structures: invalid variant path');
+      await access(path.join(ROOT,file));
+    }
+  }
   assert(Array.isArray(languages)&&languages.some(l=>l.code==='ru'&&l.published),'languages: ru must be published');
   assert(new Set(languages.map(l=>l.code.toLowerCase())).size===languages.length,'languages: duplicate locale');
   for(const l of languages)assert(/^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/.test(l.code)&&typeof l.name==='string'&&l.name.trim()&&!/[<>]/.test(l.name)&&typeof l.published==='boolean','languages: invalid entry');
   const ruCards=await Promise.all(core.map(a=>readJson(`locales/ru/cards/${a.code}.json`)));
   const [ruUi,ruQuestions,ruErrors]=await Promise.all(['ui','questions','errors'].map(f=>readJson(`locales/ru/${f}.json`)));
-  const packs=new Map(),publicFiles=new Set(['content/amino/core.json','locales/languages.json']);
+  const packs=new Map(),publicFiles=new Set(['content/amino/core.json','content/structures.json','locales/languages.json',...Object.values(structures.molecules).flatMap(Object.values)]);
   for(const language of languages.filter(l=>l.published||includeDrafts)){
     const prefix=`locales/${language.code}`;
     const files=await readdir(path.join(ROOT,prefix,'cards'));
@@ -141,7 +151,7 @@ export async function loadLocalization({includeDrafts=false}={}){
     const [ui,questions,errors]=await Promise.all(['ui','questions','errors'].map(f=>readJson(`${prefix}/${f}.json`)));
     validateDictionary(ui,ruUi,`${prefix}/ui`);validateDictionary(questions,ruQuestions,`${prefix}/questions`);validateDictionary(errors,ruErrors,`${prefix}/errors`);
     for(const name of ['ui','questions','errors'])publicFiles.add(`${prefix}/${name}.json`);
-    const data=core.map(a=>mergeCard(a,cards.find(c=>c.code===a.code),questions,language.code));
+    const data=core.map(a=>mergeCard(a,cards.find(c=>c.code===a.code),questions,language.code,structures.molecules[a.code]));
     const normalized=text=>text.normalize('NFC').trim().replace(/\s+/gu,' ').toLowerCase();
     assert(new Set(data.map(a=>normalized(a.name))).size===data.length,`${prefix}: duplicate names`);
     assert(new Set(data.map(a=>normalized(a.history.clue))).size===data.length,`${prefix}: duplicate history clues`);

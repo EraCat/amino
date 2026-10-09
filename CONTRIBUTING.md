@@ -37,3 +37,17 @@ Preserve these distinctions: free amino acid versus residue, cysteine versus cys
 Use `npm start` and check the UI in both languages, including mobile layout, the reference cards, help, a practice round, and an exam. The language selector is locked during an unfinished practice round or active exam. Progress and rankings are shared across languages; stored exam questions keep their original language and answer order.
 
 Hard mode replaces short textual choices with an input. Names accept the localized name, the shared English name, and the legacy Russian name; codes must use their own format. Case, repeated whitespace, and Russian е/ё are ignored. Where a prompt has several valid answers, any matching amino acid is accepted. Image choices and descriptive answers remain multiple choice. Existing attempts without a difficulty field belong to normal mode.
+
+## Question and image variants
+
+Question wording, structural traits and alternate history clues live in `locales/<tag>/questions.json`. The alternate clues draw only on the sourced stories in the cards. Update both published languages and regenerate locale schemas when adding keys.
+
+`content/structures.json` maps each amino acid to five prebuilt SVGs in `structures/variants/`. Python and RDKit are needed only to regenerate them: install `rdkit==2026.9.1`, then run `python scripts/generate-structures.py`. The script uses the existing isomeric SMILES, verifies 3D stereochemistry, and writes the manifest after all molecules succeed. Check all new views visually, including the heteroatom labels at phone size; camera scoring is a heuristic, not proof of readability. 3D views represent calculated conformers, not measured structures. No images are generated on the server or the user's device.
+
+Practice can restrict images to 2D or 3D; exams use the same mixed pool for everyone. Matching questions use different drawings of one molecule; all answer images in a question use the same style. The chosen URLs and feedback are saved in exam questions, so reloads keep the same question. Preserve existing assets for saved attempts. Old v3–v9 attempts remain playable and retain their scores.
+
+Mistake review stores a confusable amino acid when the wrong answer identifies one; that candidate is prioritised on the next review. Feedback compares the actual side chains when the error concerns structure or properties. `npm run smoke:hard` covers the new formats through the HTTP grading path and checks that all variant SVGs are served without active or external content.
+
+Reverse classification questions require every listed property, not an exact match of all category tags. Additional properties do not disqualify an answer. Typed questions accept every matching amino acid; multiple-choice distractors exclude all other matches. Unanswered typed classification questions in saved exams are upgraded to this rule; recorded answers and scores are left intact.
+
+`npm run smoke:classification` checks single-answer choices over all 20 standard amino acids in both languages and difficulty modes, including intersecting categories, structural properties, dietary categories and legacy saved choices. New distractors exclude every logically valid option, including shorter true classification descriptions. Old saved alternatives are accepted without changing their order.

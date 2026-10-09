@@ -36,7 +36,22 @@ function safeName(value){
   if(name.length<2||name.length>32||/[<>\p{Cc}\p{Cf}]/u.test(name))fail('invalid_name');
   return name;
 }
-function expired(next){let changed=false;for(const a of next.attempts){if(a.status==='running'&&(Date.now()>a.expiresAt||!Core.isCurrentAttempt(a))){a.status='unfinished';a.finishedAt=Math.min(Date.now(),a.expiresAt);changed=true;}}return changed;}
+function expired(next){
+  let changed=false;
+  for(const a of next.attempts){
+    if(a.status!=='running')continue;
+    if(Date.now()>a.expiresAt||!Core.isCurrentAttempt(a)){a.status='unfinished';a.finishedAt=Math.min(Date.now(),a.expiresAt);changed=true;continue;}
+    // Broaden unanswered classification inputs in saved exams as well.
+    const data=localization.packs.get(a.locale||'ru')?.data;
+    if(data)for(let i=a.cursor;i<a.questions.length;i++){
+      const q=a.questions[i];
+      if(q.type==='classset-reverse'&&q.answerMode==='text'&&q.classificationRule!==1){
+        a.questions[i]=Core.withDifficulty(data,q,'hard');changed=true;
+      }
+    }
+  }
+  return changed;
+}
 const visibleAttempt=a=>Core.TOPICS.some(topic=>topic.id===a.topic)||['names','codes'].includes(a.topic);
 function expose(a){return {id:a.id,participantId:a.participantId,name:a.name,topic:a.topic,difficulty:a.difficulty||'normal',version:a.version,locale:a.locale||'ru',contentRevision:a.contentRevision||null,total:a.questions.length,answered:a.cursor,score:Core.resultScore(a),errors:a.errors,status:a.status,startedAt:a.startedAt,finishedAt:a.finishedAt||null,expiresAt:a.expiresAt};}
 function live(a){return {...expose(a),question:a.status==='running'?Core.publicQuestion(a.questions[a.cursor],a.cursor):null};}
@@ -119,11 +134,11 @@ const server=http.createServer(async(req,res)=>{
           else{
             if(a.status!=='running')fail('exam_finished',409);if(input.index!==a.cursor)fail('refresh_question',409);
             if(!textAnswer&&(input.choice<0||input.choice>=q.choices.length))fail('choice_not_found');
-            const selected=textAnswer?input.answer.trim():q.choices[input.choice],correct=textAnswer?Core.checkTextAnswer(q,input.answer):q.choiceIds?q.choiceIds[input.choice]===q.correctId:selected===q.correct;
+            const selected=textAnswer?input.answer.trim():q.choices[input.choice],correct=textAnswer?Core.checkTextAnswer(q,input.answer):Core.checkChoiceAnswer(localization.packs.get(a.locale||'ru').data,q,input.choice);
             if(correct)a.score++;else a.errors++;a.cursor++;
             if(a.errors>=Core.MAX_ERRORS)a.status='failed';else if(a.cursor===a.questions.length)a.status='passed';
             if(a.status!=='running')a.finishedAt=Date.now();
-            const feedback={right:correct,selected,correct:q.correct,...(!textAnswer?{selectedIndex:input.choice,correctIndex:q.choiceIds?q.choiceIds.indexOf(q.correctId):q.choices.indexOf(q.correct),selectedId:q.choiceIds?.[input.choice]}:{}),correctId:q.correctId,code:q.code,explanation:q.explanation};a.answers.push({...(textAnswer?{answer:input.answer}:{choice:input.choice}),feedback});changed=true;reply={attempt:live(a),feedback};
+            const feedback={right:correct,selected,correct:correct&&!textAnswer?selected:q.correct,...(!textAnswer?{selectedIndex:input.choice,correctIndex:correct?input.choice:q.choiceIds?q.choiceIds.indexOf(q.correctId):q.choices.indexOf(q.correct),selectedId:q.choiceIds?.[input.choice]}:{}),correctId:correct&&!textAnswer?q.choiceIds?.[input.choice]||q.correctId:q.correctId,code:q.code,explanation:Core.answerExplanation(q,textAnswer?null:q.choiceIds?.[input.choice])};a.answers.push({...(textAnswer?{answer:input.answer}:{choice:input.choice}),feedback});changed=true;reply={attempt:live(a),feedback};
           }
         }
         else if(route==='/api/abandon'&&req.method==='POST'){
@@ -144,7 +159,9 @@ const server=http.createServer(async(req,res)=>{
     // Keep images in already running attempts available after the asset rename.
     const legacy=/^structures\/([A-Z])\.svg$/.exec(relative);
     if(legacy)relative=data.find(a=>a.code===legacy[1])?.structure||relative;
-    if(!statics.has(relative)&&!data.some(a=>a.structure===relative))fail('page_not_found',404);
+    // Saved attempts keep their exact image URLs across later regenerations.
+    const variant=/^structures\/variants\/[a-f0-9]{24}\.svg$/.test(relative);
+    if(!statics.has(relative)&&!variant&&!data.some(a=>a.structure===relative))fail('page_not_found',404);
     let content;try{content=await readFile(path.join(ROOT,relative));}catch(e){if(e.code==='ENOENT')fail('file_not_found',404);throw e;}
     res.writeHead(200,{'Content-Type':mime[path.extname(relative)]||'application/octet-stream','Cache-Control':'no-cache','X-Content-Type-Options':'nosniff','Referrer-Policy':'same-origin','Content-Security-Policy':"default-src 'self'; script-src 'self' https://mc.yandex.ru https://yastatic.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://mc.yandex.ru https://mc.yandex.az https://mc.yandex.by https://mc.yandex.co.il https://mc.yandex.com https://mc.yandex.com.am https://mc.yandex.com.ge https://mc.yandex.com.tr https://mc.yandex.ee https://mc.yandex.fr https://mc.yandex.kg https://mc.yandex.kz https://mc.yandex.lt https://mc.yandex.lv https://mc.yandex.md https://mc.yandex.tj https://mc.yandex.tm https://mc.yandex.uz; connect-src 'self' https://mc.yandex.ru https://mc.yandex.az https://mc.yandex.by https://mc.yandex.co.il https://mc.yandex.com https://mc.yandex.com.am https://mc.yandex.com.ge https://mc.yandex.com.tr https://mc.yandex.ee https://mc.yandex.fr https://mc.yandex.kg https://mc.yandex.kz https://mc.yandex.lt https://mc.yandex.lv https://mc.yandex.md https://mc.yandex.tj https://mc.yandex.tm https://mc.yandex.uz; base-uri 'none'; frame-ancestors 'none'"});res.end(req.method==='HEAD'?undefined:content);
   }catch(e){if(!e.status)console.error(e);const code=e.publicCode||'save_failed';json(res,e.status||503,{errorCode:code,error:localization.packs.get(locale).errors[code]||localization.packs.get('ru').errors[code]});}

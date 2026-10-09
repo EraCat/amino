@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "molecules": {
+    "G": {
+      "skeletal": "structures/variants/a0f560d7ddf3fec4e5341ad5.svg",
+      "rotated": "structures/variants/fed196e228fc7642189352d5.svg",
+      "explicit": "structures/variants/7f038e86459c5936275442d8.svg",
+      "ball": "structures/variants/05769f0063710c777cafc477.svg",
+      "ball-alt": "structures/variants/6571fd952dd423acba114028.svg"
+    },
+    "A": {
+      "skeletal": "structures/variants/ed23ec527bba5626608cd779.svg",
+      "rotated": "structures/variants/d88fb4bb46489ca7b2704200.svg",
+      "explicit": "structures/variants/26c19b55409f55ff1c77fdc8.svg",
+      "ball": "structures/variants/9d3fbceaa7273e2a8b4ede4d.svg",
+      "ball-alt": "structures/variants/fc056391d8dacde3f56cfea5.svg"
+    },
+    "V": {
+      "skeletal": "structures/variants/8e061cf01fb586ba63f2fda2.svg",
+      "rotated": "structures/variants/8ed86dbe37e3fb5ded065def.svg",
+      "explicit": "structures/variants/8dd9371c3c6a268959978b40.svg",
+      "ball": "structures/variants/ba4df438dac2cc5d2b4a14e7.svg",
+      "ball-alt": "structures/variants/7d2bfc94655a3fde74ba4862.svg"
+    },
+    "L": {
+      "skeletal": "structures/variants/420b0b929fe53cca90744b21.svg",
+      "rotated": "structures/variants/a775c6bc56722ff98194acbd.svg",
+      "explicit": "structures/variants/eb3d40ac0fe5a711eba0d14a.svg",
+      "ball": "structures/variants/1f813fe6eaed57804337b921.svg",
+      "ball-alt": "structures/variants/5c40107454c1101c6d9d1f33.svg"
+    },
+    "I": {
+      "skeletal": "structures/variants/d629a4926ee8b2661b970ffd.svg",
+      "rotated": "structures/variants/a373232b705b88533f076905.svg",
+      "explicit": "structures/variants/a851287ada2ccf1b2b7530cd.svg",
+      "ball": "structures/variants/50940dccf021a7a84152c0e6.svg",
+      "ball-alt": "structures/variants/8bd265855b5aee9540069cf8.svg"
+    },
+    "M": {
+      "skeletal": "structures/variants/adb9784080020ab25af0573d.svg",
+      "rotated": "structures/variants/9a542fdf7be495dde6d6ec39.svg",
+      "explicit": "structures/variants/a7ec19a0161e2988bbe80a3c.svg",
+      "ball": "structures/variants/467d6ac9988823a0b7e010b2.svg",
+      "ball-alt": "structures/variants/d0f5b5676cb4ec97da5ce73e.svg"
+    },
+    "P": {
+      "skeletal": "structures/variants/656c17b8b0e57d5b29986232.svg",
+      "rotated": "structures/variants/3e4e8dfbf03d889f030765f1.svg",
+      "explicit": "structures/variants/4dafed2a5fb4378b5eb9f0c3.svg",
+      "ball": "structures/variants/9d7d43575b3b94a6694f300a.svg",
+      "ball-alt": "structures/variants/af3c20995895a684662fefe9.svg"
+    },
+    "F": {
+      "skeletal": "structures/variants/508083b00c449fdeb730d7d4.svg",
+      "rotated": "structures/variants/d43798e036b0d77de01c8de9.svg",
+      "explicit": "structures/variants/05f5803aea35b5f493018344.svg",
+      "ball": "structures/variants/6973ef1327160bc5bcadaf4a.svg",
+      "ball-alt": "structures/variants/e050405e25640c19eb38d5c3.svg"
+    },
+    "W": {
+      "skeletal": "structures/variants/a4b9dd634da35ee7a5e57a25.svg",
+      "rotated": "structures/variants/60e5ce5474d100ec958f45b4.svg",
+      "explicit": "structures/variants/5f904bf3ece396253a850926.svg",
+      "ball": "structures/variants/770ada01d339e04f8a058cd5.svg",
+      "ball-alt": "structures/variants/8bea829fec8196bdc37ab9cc.svg"
+    },
+    "S": {
+      "skeletal": "structures/variants/3370bde3f3c8a529365a50ef.svg",
+      "rotated": "structures/variants/37bbadae9301ace3cadc4d32.svg",
+      "explicit": "structures/variants/08ff97478ba70f30d43465b8.svg",
+      "ball": "structures/variants/79d9680f0a0a967903cf2826.svg",
+      "ball-alt": "structures/variants/e0c48defada0de7ef7979a53.svg"
+    },
+    "T": {
+      "skeletal": "structures/variants/d792090dbce1b65672298165.svg",
+      "rotated": "structures/variants/4a2e54766af89e0b0f86b199.svg",
+      "explicit": "structures/variants/502c087cc0686d9968f9db49.svg",
+      "ball": "structures/variants/3ce0e13c972aee7720842ec2.svg",
+      "ball-alt": "structures/variants/1ebda387f0516d42310521ea.svg"
+    },
+    "C": {
+      "skeletal": "structures/variants/27ab99d4e14e9cc8b7126a1c.svg",
+      "rotated": "structures/variants/c23090c86c1b055b3781019a.svg",
+      "explicit": "structures/variants/4e7e468b225d819e2b1e34ea.svg",
+      "ball": "structures/variants/c4fd420319c2694e92cf926a.svg",
+      "ball-alt": "structures/variants/5df95aa6d78b784ae7c40974.svg"
+    },
+    "Y": {
+      "skeletal": "structures/variants/2d250017c41cd7e95d4d16bc.svg",
+      "rotated": "structures/variants/eb4988b9bf41823ba203fc24.svg",
+      "explicit": "structures/variants/5ad9d0c1b620186b43635fbc.svg",
+      "ball": "structures/variants/ac6e82ad19c69feb31d11c94.svg",
+      "ball-alt": "structures/variants/7651692d7517297b9f49e7c8.svg"
+    },
+    "N": {
+      "skeletal": "structures/variants/316c1f4cbf1b523c38ee2105.svg",
+      "rotated": "structures/variants/1cf2b9929f75e05229608a6e.svg",
+      "explicit": "structures/variants/81e579949b660ff345027bab.svg",
+      "ball": "structures/variants/7118fe5c54a09686bfb5d037.svg",
+      "ball-alt": "structures/variants/0043f43a658f09b46aef1e2d.svg"
+    },
+    "Q": {
+      "skeletal": "structures/variants/41a92e4e85105f0037693c43.svg",
+      "rotated": "structures/variants/cc9f1a4f0266c0fb77d0858a.svg",
+      "explicit": "structures/variants/a462186a8bbce1cb5d67be79.svg",
+      "ball": "structures/variants/797da7291eb865f2d03d4429.svg",
+      "ball-alt": "structures/variants/08981739f7ff8ca49b6c1463.svg"
+    },
+    "D": {
+      "skeletal": "structures/variants/a4e5e1f98fcec0cf8c29ab55.svg",
+      "rotated": "structures/variants/5524a72faf3b296deb06aedb.svg",
+      "explicit": "structures/variants/72885848fe9d2a8a66c85f59.svg",
+      "ball": "structures/variants/0a399825cc6d69a3061fb7ad.svg",
+      "ball-alt": "structures/variants/87853d271a9178bfce357b33.svg"
+    },
+    "E": {
+      "skeletal": "structures/variants/6c1126741d9c40335b9220ac.svg",
+      "rotated": "structures/variants/59eb87ef9a4d8194f3b4b2a1.svg",
+      "explicit": "structures/variants/fdc72a0ee248331c454fdae6.svg",
+      "ball": "structures/variants/312bf73376b57c8f2668c18f.svg",
+      "ball-alt": "structures/variants/7b7fdd289e200ab563586181.svg"
+    },
+    "K": {
+      "skeletal": "structures/variants/84ca84969ef2ac174035242d.svg",
+      "rotated": "structures/variants/b1145b0a4277ff0b1a2bcfb3.svg",
+      "explicit": "structures/variants/4ad8e19383bdcac85d21f822.svg",
+      "ball": "structures/variants/df95c0d9ae1e76fc1a553785.svg",
+      "ball-alt": "structures/variants/579979c378d578d2f6920792.svg"
+    },
+    "R": {
+      "skeletal": "structures/variants/77ca21612593bb1cfdba0c04.svg",
+      "rotated": "structures/variants/b0eac2af7ceeba12ff9ddc7c.svg",
+      "explicit": "structures/variants/cb186bfca1633d90362713ab.svg",
+      "ball": "structures/variants/1d1007b8cbe190628d38e5f2.svg",
+      "ball-alt": "structures/variants/ce38399fe9a1a09a670e5e97.svg"
+    },
+    "H": {
+      "skeletal": "structures/variants/f54df854e1b14dd0586172a4.svg",
+      "rotated": "structures/variants/367b8bca2a4dd53a3befcf6e.svg",
+      "explicit": "structures/variants/68ded2ae856a18307da1a74b.svg",
+      "ball": "structures/variants/245e276e458ee03e0ca9c9af.svg",
+      "ball-alt": "structures/variants/e950d5d9ce2701f6a5c8cccc.svg"
+    },
+    "U": {
+      "skeletal": "structures/variants/fd9b8aa843b1db72d8bd11d4.svg",
+      "rotated": "structures/variants/04925ff3c793da00fcfcd79b.svg",
+      "explicit": "structures/variants/ec233ba267d18231f5797156.svg",
+      "ball": "structures/variants/36d4b5911fcc08c7b84db73a.svg",
+      "ball-alt": "structures/variants/19d719e0f1d714819c9cac13.svg"
+    },
+    "O": {
+      "skeletal": "structures/variants/7bef5bf8627767980ec1d849.svg",
+      "rotated": "structures/variants/4d91fba7b826c600a67b695e.svg",
+      "explicit": "structures/variants/d3aba0d5ed72f6728b787a95.svg",
+      "ball": "structures/variants/aed00f63e2b6977200c5c86a.svg",
+      "ball-alt": "structures/variants/24f8aafd9c6b30bf9c893b85.svg"
+    }
+  }
+}

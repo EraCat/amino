@@ -988,15 +988,7 @@
           "type": "string",
           "minLength": 1
         },
-        "hardTitle": {
-          "type": "string",
-          "minLength": 1
-        },
         "hardPassedCount": {
-          "type": "string",
-          "minLength": 1
-        },
-        "hardLegend": {
           "type": "string",
           "minLength": 1
         },
@@ -1041,6 +1033,52 @@
           "minLength": 1
         },
         "historyUnavailable": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "representations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mixed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "2d": {
+          "type": "string",
+          "minLength": 1
+        },
+        "3d": {
+          "type": "string",
+          "minLength": 1
+        },
+        "next": {
+          "type": "string",
+          "minLength": 1
+        },
+        "modelNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sidechainNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "zoom": {
+          "type": "string",
+          "minLength": 1
+        },
+        "enlarged": {
+          "type": "string",
+          "minLength": 1
+        },
+        "zoomChoices": {
           "type": "string",
           "minLength": 1
         }

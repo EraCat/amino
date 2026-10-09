@@ -195,6 +195,38 @@
         "essential-reverse": {
           "type": "string",
           "minLength": 1
+        },
+        "code-pair": {
+          "type": "string",
+          "minLength": 1
+        },
+        "code-link": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "type": "string",
+          "minLength": 1
+        },
+        "class-image": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structure-match": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sidechain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "property-image": {
+          "type": "string",
+          "minLength": 1
+        },
+        "history-code": {
+          "type": "string",
+          "minLength": 1
         }
       }
     },
@@ -237,6 +269,18 @@
         "essential-reverse": {
           "type": "string",
           "minLength": 1
+        },
+        "code-link": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sidechain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "history-code": {
+          "type": "string",
+          "minLength": 1
         }
       }
     },
@@ -259,6 +303,186 @@
       "minLength": 1
     },
     "explanation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "traits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hydrogen": {
+          "type": "string",
+          "minLength": 1
+        },
+        "methyl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "branched": {
+          "type": "string",
+          "minLength": 1
+        },
+        "thiol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "thioether": {
+          "type": "string",
+          "minLength": 1
+        },
+        "phenol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "indole": {
+          "type": "string",
+          "minLength": 1
+        },
+        "imidazole": {
+          "type": "string",
+          "minLength": 1
+        },
+        "amide": {
+          "type": "string",
+          "minLength": 1
+        },
+        "carboxyl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "guanidine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "amine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "alcohol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pyrrolidine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "benzyl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selenol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "twoCenters": {
+          "type": "string",
+          "minLength": 1
+        },
+        "achiral": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "historyDetails": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "G": {
+          "type": "string",
+          "minLength": 1
+        },
+        "A": {
+          "type": "string",
+          "minLength": 1
+        },
+        "V": {
+          "type": "string",
+          "minLength": 1
+        },
+        "L": {
+          "type": "string",
+          "minLength": 1
+        },
+        "I": {
+          "type": "string",
+          "minLength": 1
+        },
+        "M": {
+          "type": "string",
+          "minLength": 1
+        },
+        "P": {
+          "type": "string",
+          "minLength": 1
+        },
+        "F": {
+          "type": "string",
+          "minLength": 1
+        },
+        "W": {
+          "type": "string",
+          "minLength": 1
+        },
+        "S": {
+          "type": "string",
+          "minLength": 1
+        },
+        "T": {
+          "type": "string",
+          "minLength": 1
+        },
+        "C": {
+          "type": "string",
+          "minLength": 1
+        },
+        "Y": {
+          "type": "string",
+          "minLength": 1
+        },
+        "N": {
+          "type": "string",
+          "minLength": 1
+        },
+        "Q": {
+          "type": "string",
+          "minLength": 1
+        },
+        "D": {
+          "type": "string",
+          "minLength": 1
+        },
+        "E": {
+          "type": "string",
+          "minLength": 1
+        },
+        "K": {
+          "type": "string",
+          "minLength": 1
+        },
+        "R": {
+          "type": "string",
+          "minLength": 1
+        },
+        "H": {
+          "type": "string",
+          "minLength": 1
+        },
+        "U": {
+          "type": "string",
+          "minLength": 1
+        },
+        "O": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "contrast": {
+      "type": "string",
+      "minLength": 1
+    },
+    "classificationExamples": {
       "type": "string",
       "minLength": 1
     }
