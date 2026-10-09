@@ -50,18 +50,16 @@ try{
     if(pack.draft){console.log(`${locale}: draft, ${pack.cards.length}/22 supplied cards checked`);continue;}
     for(const a of pack.data){
       for(const type of Core.TOPICS.flatMap(t=>t.types).filter(type=>Core.allowed(a,type))){
-        for(const codon of type.startsWith('codon')?a.codons:[undefined]){
-          const q=Core.question(pack.data,a,type,Math.random,codon);
-          assert(typeof q.text==='string'&&q.text.trim()&&typeof q.explanation==='string'&&q.explanation.trim(),`${locale}/${a.code}/${type}: missing question wording`);
-          const correctIndex=q.choiceIds.indexOf(q.correctId);
-          assert(correctIndex>=0&&q.choices[correctIndex]===q.correct,`${locale}/${a.code}/${type}: correct answer mismatch`);
-          assert(new Set(q.choices).size===q.choices.length,`${locale}/${a.code}/${type}: indistinguishable answer labels`);
-          assert(q.choices.length===(type==='essential'?2:4),`${locale}/${a.code}/${type}: incorrect choice count`);
-          assert(!Object.hasOwn(Core.publicQuestion(q,0),'correctId'),`${locale}: public question leaks the correct answer`);
-          assert(!Object.hasOwn(Core.publicQuestion(q,0),'code'),`${locale}: public question leaks the target amino acid`);
-          assert(!Object.hasOwn(Core.publicQuestion(q,0),'choiceIds'),`${locale}: public question leaks semantic answer IDs`);
-          checked++;
-        }
+        const q=Core.question(pack.data,a,type);
+        assert(typeof q.text==='string'&&q.text.trim()&&typeof q.explanation==='string'&&q.explanation.trim(),`${locale}/${a.code}/${type}: missing question wording`);
+        const correctIndex=q.choiceIds.indexOf(q.correctId);
+        assert(correctIndex>=0&&q.choices[correctIndex]===q.correct,`${locale}/${a.code}/${type}: correct answer mismatch`);
+        assert(new Set(q.choices).size===q.choices.length,`${locale}/${a.code}/${type}: indistinguishable answer labels`);
+        assert(q.choices.length===(type==='essential'?2:4),`${locale}/${a.code}/${type}: incorrect choice count`);
+        assert(!Object.hasOwn(Core.publicQuestion(q,0),'correctId'),`${locale}: public question leaks the correct answer`);
+        assert(!Object.hasOwn(Core.publicQuestion(q,0),'code'),`${locale}: public question leaks the target amino acid`);
+        assert(!Object.hasOwn(Core.publicQuestion(q,0),'choiceIds'),`${locale}: public question leaks semantic answer IDs`);
+        checked++;
       }
     }
     for(const topic of Core.TOPICS){
@@ -70,7 +68,7 @@ try{
       assert(questions.filter(q=>topic.forward.includes(q.type)).length===15,`${locale}/${topic.id}: wrong directional balance`);
       assert(new Set(questions.map(q=>q.code)).size===20,`${locale}/${topic.id}: not all standard amino acids represented`);
     }
-    console.log(`${locale}: 22 cards and all 7 exam topics valid`);
+    console.log(`${locale}: 22 cards and all ${Core.TOPICS.length} exam topics valid`);
   }
-  console.log(`Validated ${checked} generated questions, including every synonymous codon.`);
+  console.log(`Validated ${checked} generated questions.`);
 }catch(error){console.error(error.message);process.exitCode=1;}

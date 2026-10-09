@@ -254,15 +254,7 @@
           "type": "string",
           "minLength": 1
         },
-        "codons": {
-          "type": "string",
-          "minLength": 1
-        },
         "class": {
-          "type": "string",
-          "minLength": 1
-        },
-        "formula": {
           "type": "string",
           "minLength": 1
         },
@@ -333,14 +325,6 @@
               "minLength": 1
             },
             "three": {
-              "type": "string",
-              "minLength": 1
-            },
-            "formula": {
-              "type": "string",
-              "minLength": 1
-            },
-            "codon": {
               "type": "string",
               "minLength": 1
             }
@@ -448,19 +432,11 @@
               "type": "string",
               "minLength": 1
             },
-            "formula": {
-              "type": "string",
-              "minLength": 1
-            },
             "class": {
               "type": "string",
               "minLength": 1
             },
             "properties": {
-              "type": "string",
-              "minLength": 1
-            },
-            "codons": {
               "type": "string",
               "minLength": 1
             },
@@ -482,19 +458,11 @@
           "type": "string",
           "minLength": 1
         },
-        "codonNote": {
-          "type": "string",
-          "minLength": 1
-        },
         "percentCorrect": {
           "type": "string",
           "minLength": 1
         },
         "anotherRound": {
-          "type": "string",
-          "minLength": 1
-        },
-        "codon": {
           "type": "string",
           "minLength": 1
         },
@@ -568,10 +536,6 @@
           "type": "string",
           "minLength": 1
         },
-        "structureFormulaAlt": {
-          "type": "string",
-          "minLength": 1
-        },
         "groupsSummary": {
           "type": "string",
           "minLength": 1
@@ -581,18 +545,6 @@
           "minLength": 1
         },
         "historyTitle": {
-          "type": "string",
-          "minLength": 1
-        },
-        "codons": {
-          "type": "string",
-          "minLength": 1
-        },
-        "standardCode": {
-          "type": "string",
-          "minLength": 1
-        },
-        "formula": {
           "type": "string",
           "minLength": 1
         },
@@ -712,22 +664,6 @@
           "type": "string",
           "minLength": 1
         },
-        "geneticTitle": {
-          "type": "string",
-          "minLength": 1
-        },
-        "genetic": {
-          "type": "string",
-          "minLength": 1
-        },
-        "formulaTitle": {
-          "type": "string",
-          "minLength": 1
-        },
-        "formula": {
-          "type": "string",
-          "minLength": 1
-        },
         "historyTitle": {
           "type": "string",
           "minLength": 1
@@ -741,10 +677,6 @@
           "minLength": 1
         },
         "stored": {
-          "type": "string",
-          "minLength": 1
-        },
-        "sourceGenetic": {
           "type": "string",
           "minLength": 1
         },
@@ -769,6 +701,14 @@
           "minLength": 1
         },
         "sourcePubchem": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structuresTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structures": {
           "type": "string",
           "minLength": 1
         }

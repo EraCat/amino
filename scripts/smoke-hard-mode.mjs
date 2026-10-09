@@ -15,16 +15,15 @@ for(const locale of ['ru','en']){
   const data=localization.packs.get(locale).data,byCode=code=>data.find(a=>a.code===code);
   const token=(locale==='ru'?'a':'b').repeat(64),participantId=randomUUID();
   participants.push({id:participantId,name:locale,tokenHash:createHash('sha256').update(token).digest('hex')});
-  const pairs=[['L','formula-reverse','I'],['D','classset-reverse','E'],['V','essential-reverse','K'],
-    ['L','codon'],['A','name'],['A','code'],['A','three'],['A','formula'],['A','structure'],
-    ['A','property'],['A','history'],['A','codon-reverse'],['N','name-three'],
+  const pairs=[['D','classset-reverse','E'],['V','essential-reverse','K'],
+    ['A','name'],['A','code'],['A','three'],['A','structure'],
+    ['A','property'],['A','history'],['N','name-three'],
     ['A','structure-reverse'],['A','classset'],['A','history-forward'],['A','property-forward'],['A','essential']];
   const questions=pairs.map(([code,type])=>Core.withDifficulty(data,Core.question(data,byCode(code),type),'hard'));
   const values=pairs.map(([code,type,alternative],index)=>alternative?byCode(alternative).name:
-    type==='codon'?byCode(code).codons.find(c=>c!==questions[index].correct):
     type==='name'?(locale==='ru'?byCode(code).englishName:byCode(code).legacyName):questions[index].correct);
   const attempt={id:randomUUID(),participantId,name:locale,requestId:randomUUID(),topic:'names-codes',difficulty:'hard',locale,
-    version:Core.VERSION,questions,cursor:0,score:0,errors:0,status:'running',startedAt:Date.now(),expiresAt:Date.now()+3600000,answers:[]};
+    version:'2026-10-v8',questions,cursor:0,score:0,errors:0,status:'running',startedAt:Date.now(),expiresAt:Date.now()+3600000,answers:[]};
   attempts.push(attempt);fixtures.push({locale,token,attempt,values});
 }
 await writeFile(path.join(directory,'leaderboard.json'),JSON.stringify({schema:1,participants,attempts}));

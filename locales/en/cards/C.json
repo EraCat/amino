@@ -1,6 +1,6 @@
 {
   "code": "C",
-  "sourceRevision": 1,
+  "sourceRevision": 2,
   "name": "Cysteine",
   "info": "When oxidized, the thiol groups of two cysteines form a disulfide bridge. Its synthesis depends on methionine availability.",
   "feature": "Thiol group; forms disulfide bridges when oxidized",

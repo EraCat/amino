@@ -5,7 +5,7 @@ Translations are UTF-8 JSON. No JavaScript changes or dependency installation ar
 ## Edit one card
 
 1. Open `locales/ru/cards/G.json` (the source) and the matching card in your language, such as `locales/en/cards/G.json`.
-2. Translate `name`, `info`, `feature`, `history.clue`, and `history.story`. Translate `codonNote` and `sideLabel` when present. Keep all scientific facts, qualifications, dates, and names. Do not shorten the historical explanation into just the clue.
+2. Translate `name`, `info`, `feature`, `history.clue`, and `history.story`. Translate `sideLabel` when present. Keep all scientific facts, qualifications, dates, and names. Do not shorten the historical explanation into just the clue.
 3. Keep `code`, keys, and `sourceRevision`. Set `sourceRevision` to the current `revision` in `content/amino/core.json` after reviewing the source. Use plain text, without HTML. The history clue appears as a quiz question and answer, so it must uniquely identify the same amino acid.
 4. An optional `links.wikipedia` is an explicit HTTPS link to the article in your language. Scientific sources and chemical images are shared; do not duplicate them.
 5. Run `npm run check:locales` with Node.js 22+, and open a pull request. GitHub also checks the files automatically.
@@ -22,18 +22,18 @@ After a native speaker has reviewed the translation and `npm run check:locales` 
 
 ## Scientific corrections and source updates
 
-Use a separate pull request for changes to scientific facts or the learning classification. Formula, codon, classification, SVG, and answer identity belong in `content/amino/core.json`, not translation files. Increase the affected card's `revision` when shared content changes too, and review published translations before updating their `sourceRevision`.
+Use a separate pull request for changes to scientific facts or the learning classification. Classification, SVG, and answer identity belong in `content/amino/core.json`, not translation files. Increase the affected card's `revision` when shared content changes too, and review published translations before updating their `sourceRevision`.
 
 Russian is currently the editorial source. When changing its card text, increase that card's `revision` in `core.json`, update the Russian `sourceRevision`, and review the other published translations before increasing their `sourceRevision`. CI checks source revisions against the pull request base. This prevents an old translation from silently appearing current.
 
-Preserve these distinctions: free amino acid versus residue, cysteine versus cystine, a side-chain category versus a dietary category, and ordinary stop codons versus special Sec/Pyl decoding. Translate essentiality for a healthy adult consistently. Do not turn a qualified statement into an absolute one.
+Preserve these distinctions: free amino acid versus residue, cysteine versus cystine, and a side-chain category versus a dietary category. Translate essentiality for a healthy adult consistently. Do not turn a qualified statement into an absolute one.
 
 ## Behavior checks
 
-`npm run smoke:locales` uses temporary results, starts an isolated local server, and checks translated JSON delivery, both exam languages, answer grading, repeat requests, and resuming a legacy Russian attempt. It does not touch real participant results.
+`npm run smoke:locales` uses temporary results, starts an isolated local server, and checks translated JSON delivery, both exam languages, answer grading, repeat requests, resuming a legacy Russian attempt, and excluding removed topics from starts, history, and rankings. It does not touch real participant results.
 
-`npm run smoke:hard` checks hard mode in both languages: typed answers, multiple valid names and codons, input validation, choice questions, repeat requests, saved difficulty, the three-error rule, and separate rankings. It also uses an isolated server and temporary results.
+`npm run smoke:hard` checks hard mode in both languages: typed answers, multiple valid names, input validation, choice questions, repeat requests, saved difficulty, the three-error rule, and separate rankings. It also uses an isolated server and temporary results.
 
 Use `npm start` and check the UI in both languages, including mobile layout, the reference cards, help, a practice round, and an exam. The language selector is locked during an unfinished practice round or active exam. Progress and rankings are shared across languages; stored exam questions keep their original language and answer order.
 
-Hard mode replaces short textual choices with an input. Names accept the localized name, the shared English name, and the legacy Russian name; codes must use their own format. Case, repeated whitespace, and Russian е/ё are ignored. Formula subscripts are normalized to digits. Where a prompt has several valid answers, any matching amino acid or mRNA codon is accepted. Image choices and descriptive answers remain multiple choice. Existing attempts without a difficulty field belong to normal mode.
+Hard mode replaces short textual choices with an input. Names accept the localized name, the shared English name, and the legacy Russian name; codes must use their own format. Case, repeated whitespace, and Russian е/ё are ignored. Where a prompt has several valid answers, any matching amino acid is accepted. Image choices and descriptive answers remain multiple choice. Existing attempts without a difficulty field belong to normal mode.

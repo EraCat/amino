@@ -12,7 +12,6 @@
     "info": {"type": "string", "minLength": 1},
     "feature": {"type": "string", "minLength": 1},
     "sideLabel": {"type": "string", "minLength": 1},
-    "codonNote": {"type": "string", "minLength": 1},
     "history": {
       "type": "object",
       "additionalProperties": false,

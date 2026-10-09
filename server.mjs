@@ -97,7 +97,7 @@ const server=http.createServer(async(req,res)=>{
           if(!topic)fail('unknown_topic');if(!/^[a-f0-9-]{36}$/.test(input.requestId||''))fail('invalid_request_id');
           let p=next.participants.find(p=>p.tokenHash===hash);
           if(!p){p={id:randomUUID(),name,tokenHash:hash};next.participants.push(p);}
-          const previous=next.attempts.find(a=>a.participantId===p.id&&a.requestId===input.requestId);
+          const previous=next.attempts.find(a=>a.participantId===p.id&&a.requestId===input.requestId&&visibleAttempt(a));
           if(previous)reply=live(previous);
           else{
             const active=next.attempts.find(a=>a.participantId===p.id&&a.status==='running');

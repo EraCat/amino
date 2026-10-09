@@ -1,6 +1,6 @@
 {
   "code": "O",
-  "sourceRevision": 1,
+  "sourceRevision": 2,
   "name": "Pyrrolysine",
   "info": "The 22nd genetically encoded amino acid in some archaea and bacteria. The ε-amino group of a lysine moiety forms an amide bond with a methylpyrroline carbonyl moiety. It is incorporated through special decoding of UAG.",
   "feature": "Rare encoded amino acid",
@@ -11,6 +11,5 @@
   "links": {
     "wikipedia": "https://en.wikipedia.org/wiki/Pyrrolysine"
   },
-  "codonNote": "UAG is normally a stop codon. In some archaea and bacteria, a specialized translation system allows pyrrolysine to be incorporated.",
   "sideLabel": "(CH₂)₄–NH–C(=O)–methylpyrroline ring"
 }

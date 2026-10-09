@@ -52,7 +52,7 @@
   .ranking-summary{grid-template-columns:24px minmax(0,1fr) auto 14px;gap:10px;padding:16px 14px}
   .ranking-person{align-items:flex-start;flex-direction:column;gap:5px}
   .ranking-name{font-size:15px}
-  .peptide-chain{width:154px;height:auto;max-width:100%}
+  .peptide-chain{max-width:100%;height:auto}
   .ranking-total{font-size:27px;min-width:46px}
   .ranking-place{font-size:14px;align-self:start;padding-top:2px}
   .ranking-chevron{width:14px}

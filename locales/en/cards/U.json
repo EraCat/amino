@@ -1,6 +1,6 @@
 {
   "code": "U",
-  "sourceRevision": 1,
+  "sourceRevision": 2,
   "name": "Selenocysteine",
   "info": "The 21st genetically encoded amino acid. It is incorporated through special decoding of UGA; at a pH of about 7, its side chain is predominantly negatively charged.",
   "feature": "Contains selenium",
@@ -10,6 +10,5 @@
   },
   "links": {
     "wikipedia": "https://en.wikipedia.org/wiki/Selenocysteine"
-  },
-  "codonNote": "UGA is normally a stop codon. Selenocysteine is incorporated through special decoding of UGA with the participation of additional signals and factors."
+  }
 }

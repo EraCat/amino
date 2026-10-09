@@ -67,7 +67,7 @@ function validatePartialDictionary(value,source,label){
 
 export function validateCard(card,shared,source,label,{complete=true}={}){
   assert(object(card),`${label}: expected an object`);
-  const allowed=['code','sourceRevision','name','info','feature','history','codonNote','sideLabel','links'];
+  const allowed=['code','sourceRevision','name','info','feature','history','sideLabel','links'];
   assert(Object.keys(card).every(key=>allowed.includes(key)),`${label}: unknown card field`);
   assert(card.code===shared.code,`${label}: code must be ${shared.code}`);
   assert(Number.isInteger(card.sourceRevision)&&card.sourceRevision>=1&&card.sourceRevision<=shared.revision,`${label}: invalid sourceRevision`);
@@ -76,10 +76,10 @@ export function validateCard(card,shared,source,label,{complete=true}={}){
     assert(object(card.history)&&Object.keys(card.history).every(k=>['clue','story'].includes(k)),`${label}: invalid history fields`);
     if(complete)assert(['clue','story'].every(k=>Object.hasOwn(card.history,k)),`${label}: history requires clue and story`);
   }
-  for(const key of ['name','info','feature','history',...(source.codonNote?['codonNote']:[]),...(source.sideLabel?['sideLabel']:[])]){
+  for(const key of ['name','info','feature','history',...(source.sideLabel?['sideLabel']:[])]){
     if(complete||Object.hasOwn(card,key))(complete?validateDictionary:validatePartialDictionary)(card[key],source[key],`${label}.${key}`);
   }
-  for(const key of ['codonNote','sideLabel']){
+  for(const key of ['sideLabel']){
     if(Object.hasOwn(card,key)&&!Object.hasOwn(source,key))validateDictionary(card[key],card[key],`${label}.${key}`);
   }
   if(card.links){
@@ -99,8 +99,7 @@ export async function loadLocalization({includeDrafts=false}={}){
   assert(new Set(core.map(a=>a.code)).size===core.length,'core: duplicate amino acid codes');
   assert(core.filter(a=>a.group!=='special').length===20,'core: expected 20 standard amino acids');
   const standardCodes={G:'Gly',A:'Ala',V:'Val',L:'Leu',I:'Ile',M:'Met',P:'Pro',F:'Phe',W:'Trp',S:'Ser',T:'Thr',C:'Cys',Y:'Tyr',N:'Asn',Q:'Gln',D:'Asp',E:'Glu',K:'Lys',R:'Arg',H:'His',U:'Sec',O:'Pyl'};
-  const coreKeys=['code','three','group','essential','side','smiles','formula','structure','codons','englishName','legacyName','revision','sources','propertyId'];
-  const codonOwners=new Map();
+  const coreKeys=['code','three','group','essential','side','smiles','structure','englishName','legacyName','revision','sources','propertyId'];
   for(const a of core){
     assert(object(a)&&Object.keys(a).every(k=>coreKeys.includes(k))&&coreKeys.every(k=>Object.hasOwn(a,k)),`core ${a.code}: fields differ from the content contract`);
     assert(/^[A-Z]$/.test(a.code)&&Number.isInteger(a.revision)&&a.revision>=1,'core: invalid code or revision');
@@ -108,20 +107,11 @@ export async function loadLocalization({includeDrafts=false}={}){
     assert(['nonpolar','polar','acidic','basic','special'].includes(a.group),`core ${a.code}: unknown group`);
     assert((a.group==='special')===['U','O'].includes(a.code),`core ${a.code}: only Sec/Pyl are special`);
     assert(a.group==='special'?a.essential===null:typeof a.essential==='boolean',`core ${a.code}: invalid essentiality`);
-    for(const key of ['side','smiles','formula','englishName','legacyName'])assert(typeof a[key]==='string'&&a[key].trim()&&!/[<>]/.test(a[key]),`core ${a.code}: invalid ${key}`);
-    assert(/^(?:[A-Z][a-z]?\d*)+$/.test(a.formula),`core ${a.code}: invalid molecular formula`);
+    for(const key of ['side','smiles','englishName','legacyName'])assert(typeof a[key]==='string'&&a[key].trim()&&!/[<>]/.test(a[key]),`core ${a.code}: invalid ${key}`);
     assert(/^structures\/[a-f0-9]+\.svg$/.test(a.structure),`core ${a.code}: invalid image path`);
     assert(a.propertyId==='property:'+a.code,`core ${a.code}: invalid propertyId`);
-    assert(Array.isArray(a.codons)&&a.codons.length>0&&a.codons.every(c=>/^[ACGU]{3}$/.test(c)),`core ${a.code}: invalid codons`);
-    assert(new Set(a.codons).size===a.codons.length,`core ${a.code}: duplicate codon`);
-    if(a.group==='special')assert(a.codons.length===1&&a.codons[0]===(a.code==='U'?'UGA':'UAG'),`core ${a.code}: incorrect special codon`);
-    if(a.group!=='special')for(const codon of a.codons){
-      assert(!['UAA','UAG','UGA'].includes(codon),`core ${a.code}: standard amino acid has a stop codon`);
-      assert(!codonOwners.has(codon),`core: codon ${codon} belongs to multiple standard amino acids`);codonOwners.set(codon,a.code);
-    }
     assert(Array.isArray(a.sources)&&a.sources.length>0&&a.sources.every(s=>typeof s==='string'&&new URL(s).protocol==='https:'),`core ${a.code}: invalid sources`);
   }
-  assert(codonOwners.size===61,'core: the standard genetic code must cover all 61 sense codons');
   assert(new Set(core.map(a=>a.englishName)).size===core.length,'core: duplicate English names');
   await Promise.all(core.map(a=>access(path.join(ROOT,a.structure))));
   assert(Array.isArray(languages)&&languages.some(l=>l.code==='ru'&&l.published),'languages: ru must be published');

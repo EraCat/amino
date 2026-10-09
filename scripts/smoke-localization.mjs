@@ -15,7 +15,14 @@ const legacyQuestion=Core.question(localization.packs.get('ru').data,localizatio
 delete legacyQuestion.choiceIds;delete legacyQuestion.correctId;delete legacyQuestion.locale;
 const legacy={id:legacyId,participantId,requestId:randomUUID(),name:'Legacy',topic:'names-codes',version:'2026-10-v7',
   questions:[legacyQuestion],cursor:0,score:0,errors:0,status:'running',startedAt:Date.now(),expiresAt:Date.now()+3600000,answers:[]};
-await writeFile(path.join(directory,'leaderboard.json'),JSON.stringify({schema:1,participants:[{id:participantId,name:'Legacy',tokenHash:createHash('sha256').update(token).digest('hex')}],attempts:[legacy]}));
+const removedParticipantId=randomUUID();
+const removedAttempts=['formulas','codons'].map((topic,i)=>({...legacy,id:randomUUID(),requestId:randomUUID(),topic,version:'2026-10-v8',
+  status:i?'running':'passed',cursor:i?0:1,score:i?0:1}));
+removedAttempts.push({...removedAttempts[0],id:randomUUID(),participantId:removedParticipantId});
+await writeFile(path.join(directory,'leaderboard.json'),JSON.stringify({schema:1,participants:[
+  {id:participantId,name:'Legacy',tokenHash:createHash('sha256').update(token).digest('hex')},
+  {id:removedParticipantId,name:'Removed topics only',tokenHash:createHash('sha256').update('b'.repeat(64)).digest('hex')}
+],attempts:[legacy,...removedAttempts]}));
 let processOutput='';
 let child;
 try{
@@ -39,6 +46,21 @@ try{
   }
   await request('private-data/leaderboard.json',{status:404});
   await request('locales/en/cards/../../server.mjs',{status:404});
+  const topicIds=Core.TOPICS.map(topic=>topic.id);
+  assert.deepEqual(topicIds,['names-codes','classification','structures','properties','history']);
+  assert.equal(Core.TOPICS.reduce((sum,topic)=>sum+topic.total,0),150);
+  const {value:mine}=await request('api/me');
+  assert.deepEqual(mine.attempts.map(a=>a.id),[legacyId]);
+  assert.deepEqual(mine.topics.map(topic=>topic.id),topicIds);
+  for(const removed of removedAttempts){
+    await request('api/result?id='+removed.id,{status:404});
+    await request('api/attempt?id='+removed.id,{status:404});
+    await request('api/answer',{body:{attemptId:removed.id,index:0,choice:0},status:404});
+  }
+  for(const locale of ['ru','en'])for(const difficulty of ['normal','hard'])for(const topic of ['formulas','codons']){
+    const {value:rejected}=await request('api/start',{locale,body:{requestId:randomUUID(),topic,name:'Smoke',locale,difficulty},status:400});
+    assert.equal(rejected.errorCode,'unknown_topic');
+  }
   const {value:old}=await request('api/attempt?id='+legacyId);
   assert.equal(old.locale,'ru');assert.equal(old.question.text,legacyQuestion.text);
   assert.equal(old.question.choiceIds,undefined);
@@ -46,7 +68,8 @@ try{
   const {value:oldAnswer}=await request('api/answer',{body:{attemptId:legacyId,index:0,choice}});
   assert.equal(oldAnswer.feedback.right,true);assert.equal(oldAnswer.attempt.score,1);assert.equal(oldAnswer.attempt.status,'passed');
   for(const locale of ['ru','en']){
-    const requestId=randomUUID();
+    // Reusing an archived topic's request ID must not revive or expose it.
+    const requestId=locale==='ru'?removedAttempts[0].requestId:randomUUID();
     const startBody={requestId,topic:'history',name:'Smoke',locale};
     const {value:start}=await request('api/start',{locale,body:startBody});
     assert.equal(start.locale,locale);assert.equal(start.total,30);assert.equal(Object.hasOwn(start.question,'code'),false);
@@ -76,11 +99,19 @@ try{
   const {value:unsupported}=await request('api/start',{body:{requestId:randomUUID(),topic:'history',name:'Smoke',locale:'../../private-data'},status:400});
   assert.equal(unsupported.errorCode,'unsupported_locale');assert.equal(unsupported.error,localization.packs.get('en').errors.unsupported_locale);
   const {value:ranking}=await request('api/leaderboard');
+  assert.deepEqual(ranking.topics.map(topic=>topic.id),topicIds);
+  assert.deepEqual(Object.keys(ranking.rows[0].results),topicIds);
+  assert.equal(ranking.rows.some(row=>row.id===removedParticipantId),false);
   assert.equal(ranking.topics[0].title,localization.packs.get('en').questions.topics['names-codes'].title);
   assert.equal(ranking.rows[0].total,30);
   const {value:negotiated}=await request('api/leaderboard',{locale:'ru;q=0,en-US;q=1'});
   assert.equal(negotiated.topics[0].title,localization.packs.get('en').questions.topics['names-codes'].title);
-  console.log('HTTP smoke passed: JSON, RU/EN exams, stable choices, idempotency, locale pinning, legacy resume, shared ranking.');
+  const {value:history}=await request('api/history?participant='+participantId);
+  assert.equal(history.attempts.length,3);assert.ok(history.attempts.every(a=>topicIds.includes(a.topic)));
+  const saved=JSON.parse(await readFile(path.join(directory,'leaderboard.json'),'utf8'));
+  assert.ok(removedAttempts.every(a=>saved.attempts.some(stored=>stored.id===a.id)));
+  assert.equal(saved.attempts.find(a=>a.id===removedAttempts[1].id).status,'unfinished');
+  console.log('HTTP smoke passed: JSON, RU/EN exams, stable choices, idempotency, locale pinning, legacy resume, five-topic ranking and removed-topic migration.');
 }finally{
   if(child?.pid){const exited=child.exitCode!==null?Promise.resolve():once(child,'exit');child.kill();await exited;}
   await rm(directory,{recursive:true,force:true});
