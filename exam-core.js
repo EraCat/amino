@@ -84,14 +84,18 @@ var ExamCore = (() => {
     ...['code','three'].map(type=>[type,type]),['code-link','code'],['history-code','code']
   ]);
   const normalizeAnswer = value => String(value??'').normalize('NFKC').trim().replace(/\s+/gu,' ').toLowerCase().replace(/ё/g,'е');
+  // Accepted names for amino-acid identity questions, including common ionic names.
+  const NAME_ALIASES = {D:['аспартат','aspartate'],E:['глутамат','glutamate']};
+  const answerNames = a => [a.name,a.englishName,a.legacyName,...(NAME_ALIASES[a.code]||[])].filter(Boolean);
   function withDifficulty(data,q,difficulty='normal'){
     const answerKind=INPUT_KINDS[q.type];
     if(difficulty!=='hard'||!answerKind)return q;
     const a=data.find(item=>item.code===q.code);
     // A classification or dietary category can describe several amino acids.
     const matching=answerKind==='name'?data.filter(other=>allowed(other,q.type)&&matchesPrompt(a,other,q.type)):[];
-    const values=answerKind==='name'?matching.flatMap(other=>[other.name,other.englishName,other.legacyName]):[q.correct];
+    const values=answerKind==='name'?matching.flatMap(answerNames):[q.correct];
     return {...q,answerMode:'text',answerKind,text:dictionary(a).inputText[q.type],
+      ...(answerKind==='name'?{nameAnswerRule:1}:{}),
       ...(q.type==='classset-reverse'?{classificationRule:1,explanation:classificationExamples(data,a)}:{}),
       acceptedAnswers:[...new Set(values.filter(Boolean).map(normalizeAnswer))]};
   }
@@ -217,6 +221,6 @@ var ExamCore = (() => {
   }
   function answerExplanation(q,selectedId){return q.contrasts?.[selectedId]||q.explanation;}
   function isCurrentAttempt(a){return ['2026-10-v3','2026-10-v4','2026-10-v5','2026-10-v6','2026-10-v7','2026-10-v8','2026-10-v9',VERSION].includes(a.version)&&TOPICS.some(t=>t.id===a.topic);}
-  return {VERSION,LIMIT,MAX_ERRORS,TOPICS,question,allowed,build,withDifficulty,normalizeAnswer,checkTextAnswer,checkChoiceAnswer,publicQuestion,isCurrentAttempt,resultScore,answerExplanation,imageStyles,imageFor};
+  return {VERSION,LIMIT,MAX_ERRORS,TOPICS,question,allowed,build,withDifficulty,normalizeAnswer,answerNames,checkTextAnswer,checkChoiceAnswer,publicQuestion,isCurrentAttempt,resultScore,answerExplanation,imageStyles,imageFor};
 })();
 if(typeof module!=='undefined'&&module.exports)module.exports=ExamCore;

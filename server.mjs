@@ -41,11 +41,11 @@ function expired(next){
   for(const a of next.attempts){
     if(a.status!=='running')continue;
     if(Date.now()>a.expiresAt||!Core.isCurrentAttempt(a)){a.status='unfinished';a.finishedAt=Math.min(Date.now(),a.expiresAt);changed=true;continue;}
-    // Broaden unanswered classification inputs in saved exams as well.
+    // Broaden unanswered name and classification inputs in saved exams as well.
     const data=localization.packs.get(a.locale||'ru')?.data;
     if(data)for(let i=a.cursor;i<a.questions.length;i++){
       const q=a.questions[i];
-      if(q.type==='classset-reverse'&&q.answerMode==='text'&&q.classificationRule!==1){
+      if(q.answerMode==='text'&&((q.answerKind==='name'&&q.nameAnswerRule!==1)||(q.type==='classset-reverse'&&q.classificationRule!==1))){
         a.questions[i]=Core.withDifficulty(data,q,'hard');changed=true;
       }
     }

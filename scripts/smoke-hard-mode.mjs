@@ -5,6 +5,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {createHash,randomUUID} from 'node:crypto';
 import {once} from 'node:events';
+import {request as httpRequest} from 'node:http';
 import {loadLocalization,ROOT} from '../localization.mjs';
 import Core from '../exam-core.js';
 
@@ -22,23 +23,36 @@ for(const locale of ['ru','en']){
     ['A','property'],['A','history'],['N','name-three'],
     ['A','structure-reverse'],['A','classset'],['A','history-forward'],['A','property-forward'],['A','essential'],
     ['N','code-pair'],['Q','code-link'],['Y','category'],['H','class-image'],
-    ['I','structure-match'],['L','sidechain'],['C','property-image'],['G','history-code']];
+    ['I','structure-match'],['L','sidechain'],['C','property-image'],['G','history-code'],
+    ...['D','E'].flatMap(code=>['name','name-three','structure','sidechain','property','history','classset-reverse','essential-reverse'].flatMap(type=>
+      (code==='D'?['аспартат','aspartate']:['глутамат','glutamate']).map(alias=>[code,type,null,alias]))),
+    ['D','classset-reverse','E','glutamate'],['E','classset-reverse','D','аспартат'],
+    ['A','essential-reverse','D','aspartate'],['A','essential-reverse','E','глутамат']];
   const questions=pairs.map(([code,type])=>Core.withDifficulty(data,Core.question(data,byCode(code),type),'hard'));
   // Reproduce saved questions from before subset matching, then exercise migration.
   for(const q of questions.filter(q=>q.type==='classset-reverse')){
     delete q.classificationRule;
     q.acceptedAnswers=[Core.normalizeAnswer(byCode(q.code).name)];
   }
-  const values=pairs.map(([code,type,alternative],index)=>alternative?byCode(alternative).name:
-    type==='name'?(locale==='ru'?byCode(code).englishName:byCode(code).legacyName):questions[index].correct);
+  // Saved exams did not contain these aliases; resuming must upgrade name answers.
+  for(const q of questions.filter(q=>q.answerKind==='name')){
+    delete q.nameAnswerRule;
+    q.acceptedAnswers=q.acceptedAnswers.filter(value=>!['аспартат','aspartate','глутамат','glutamate'].includes(value));
+  }
+  const values=pairs.map(([code,type,alternative,alias],index)=>alias|| (alternative?byCode(alternative).name:
+    type==='name'?(locale==='ru'?byCode(code).englishName:byCode(code).legacyName):questions[index].correct));
   const attempt={id:randomUUID(),participantId,name:locale,requestId:randomUUID(),topic:'names-codes',difficulty:'hard',locale,
     version:'2026-10-v8',questions,cursor:0,score:0,errors:0,status:'running',startedAt:Date.now(),expiresAt:Date.now()+3600000,answers:[]};
-  attempts.push(attempt);fixtures.push({locale,token,attempt,values});
+  attempts.push(attempt);fixtures.push({locale,token,attempt,values,pairs,data});
   const rejectionToken=(locale==='ru'?'c':'d').repeat(64),rejectionId=randomUUID();
   participants.push({id:rejectionId,name:'Classification '+locale,tokenHash:createHash('sha256').update(rejectionToken).digest('hex')});
   const rejection={...attempt,id:randomUUID(),participantId:rejectionId,requestId:randomUUID(),topic:'classification',
     questions:['A','V','S'].map(code=>Core.withDifficulty(data,Core.question(data,byCode(code),'classset-reverse'),'hard'))};
   attempts.push(rejection);classificationRejections.push({token:rejectionToken,attempt:rejection,answers:['S','A','C'].map(code=>byCode(code).name)});
+  for(const [code,type,answer] of [['N','name','aspartate'],['Q','structure','глутамат'],['D','name','glutamate'],['E','name','аспартат']]){
+    const aliasRejection={...rejection,id:randomUUID(),requestId:randomUUID(),questions:[Core.withDifficulty(data,Core.question(data,byCode(code),type),'hard')]};
+    attempts.push(aliasRejection);classificationRejections.push({token:rejectionToken,attempt:aliasRejection,answers:[answer]});
+  }
 }
 await writeFile(path.join(directory,'leaderboard.json'),JSON.stringify({schema:1,participants,attempts}));
 let child,output='';
@@ -51,10 +65,11 @@ try{
     child.once('error',error=>{clearTimeout(timer);reject(error);});
     child.once('exit',code=>{clearTimeout(timer);reject(Error(`Server exited (${code}): ${output}`));});
   });
-  const request=async(route,token,body,status=200)=>{
-    const response=await fetch(new URL('api/'+route,origin),{method:body?'POST':'GET',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
-    const value=await response.json();assert.equal(response.status,status,`${route}: ${JSON.stringify(value)}`);return value;
-  };
+  const request=(route,token,body,status=200)=>new Promise((resolve,reject)=>{
+    const req=httpRequest(new URL('api/'+route,origin),{method:body?'POST':'GET',localAddress:'127.0.0.'+(parseInt(token[0],16)+2),headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'}},res=>{
+      let text='';res.on('data',chunk=>text+=chunk);res.on('end',()=>{try{const value=JSON.parse(text);assert.equal(res.statusCode,status,`${route}: ${text}`);resolve(value);}catch(error){reject(error);}});
+    });req.on('error',reject);req.end(body?JSON.stringify(body):undefined);
+  });
   const publicCheck=q=>{
     for(const key of ['correct','correctId','choiceIds','acceptedAnswers','code','contrasts'])assert.equal(Object.hasOwn(q,key),false,`Answer leaked: ${key}`);
     if(q.answerMode==='text')assert.equal(Object.hasOwn(q,'choices'),false);
@@ -70,7 +85,7 @@ try{
     assert.ok(!/<script|<foreignObject|\bon\w+\s*=|(?:href\s*=\s*["']|url\(\s*["']?)(?:https?:|\/\/|data:|javascript:)/i.test(svg),`Active or external SVG content: ${file}`);
     assert.ok(Buffer.byteLength(svg)<100000,`Oversized mobile asset: ${file}`);
   }
-  for(const {locale,token,attempt,values} of fixtures){
+  for(const {locale,token,attempt,values,pairs,data} of fixtures){
     let current=await request('attempt?id='+attempt.id,token);
     for(let index=0;index<attempt.questions.length;index++){
       const q=attempt.questions[index];publicCheck(current.question);
@@ -80,7 +95,7 @@ try{
         for(const invalid of [{answer:'   '},{answer:7},{answer:'x'.repeat(121)},{choice:0}])await request('answer',token,{attemptId:attempt.id,index,...invalid},400);
       }
       const response=await request('answer',token,body);assert.equal(response.feedback.right,true,`${locale}/${q.type}`);
-      if(q.type==='classset-reverse')assert.ok(response.feedback.explanation.includes(values[index]),'Feedback must list the accepted alternative');
+      if(q.type==='classset-reverse')assert.ok(response.feedback.explanation.includes(data.find(a=>a.code===(pairs[index][2]||q.code)).name),'Feedback must list the accepted alternative');
       assert.equal(response.attempt.score,index+1);
       if(index===0){
         assert.deepEqual(await request('answer',token,{...body,answer:values[index].toLowerCase()}),response);
@@ -116,7 +131,7 @@ try{
     assert.equal(last.attempt.status,'failed');assert.equal(last.attempt.errors,3);assert.equal(last.attempt.score,0);
     assert.deepEqual(await request('answer',token,lastBody),last);
     const hard=await request('leaderboard?difficulty=hard',token),normal=await request('leaderboard',token);
-    assert.equal(hard.rows.find(row=>row.id===attempt.participantId).total,30);
+    assert.equal(hard.rows.find(row=>row.id===attempt.participantId).total,Math.max(30,attempt.questions.length));
     assert.equal(normal.rows.some(row=>row.id===attempt.participantId),false);
     const legacyDefault=await request('start',token,{topic:'names-codes',name:'Normal smoke',locale,requestId:randomUUID()});
     assert.equal(legacyDefault.difficulty,'normal');assert.equal(legacyDefault.question.answerMode,undefined);assert.equal(legacyDefault.question.choices.length,4);
