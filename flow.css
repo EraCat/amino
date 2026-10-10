@@ -51,13 +51,12 @@
 .feedback{scroll-margin-bottom:110px}.answer-copy .pill{font-size:14px}.answer.correct .pill,.answer.wrong .pill{background:transparent;color:inherit;padding:0}
 
 /* Short, sourced stories in the amino acid reference and quiz feedback. */
-.representation-row{gap:12px;justify-content:space-between}.representation-row label{font-size:15px;font-weight:650}.representation-row select{min-width:135px}
 .image-prompt{display:block;width:100%;padding:0;border:0;background:white;border-radius:12px;cursor:zoom-in}.image-prompt:focus-visible{outline:2px solid var(--select);outline-offset:4px}
 .prompt-display.image-display{padding:8px;background:white}.prompt-display.image-display img{display:block;width:100%;height:230px;object-fit:contain}
 .prompt-display.formula-display{font-size:24px;line-height:1.6;letter-spacing:0;overflow-wrap:anywhere}
 .image-tools{display:block;margin:12px auto 0;min-height:44px}.structure-number{display:block;text-align:left;color:var(--muted);font-size:12px;font-weight:600}
 .enlarged-structure{display:block;width:100%;max-height:65dvh;object-fit:contain}.enlarged-options{display:grid;gap:12px}.enlarged-options figure{margin:0;border-bottom:1px solid var(--line);padding:8px}.enlarged-options figcaption{color:var(--muted);font-size:14px}.enlarged-options img{display:block;width:100%;height:auto}
-@media(max-width:700px){.prompt-display.image-display img{height:205px}.prompt-display.formula-display{font-size:20px}.representation-row select{max-width:65%}.enlarged-options figure{padding:4px}}
+@media(max-width:700px){.prompt-display.image-display img{height:205px}.prompt-display.formula-display{font-size:20px}.enlarged-options figure{padding:4px}}
 .difficulty-row{margin-block:18px}.difficulty-description,.text-answer-hint{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
 .difficulty-badge{display:inline-block;margin:8px 0;padding:5px 9px;border-radius:7px;background:var(--select-bg);color:var(--select);font-size:13px;font-weight:650}
 .text-answer-form{display:grid;gap:10px}.text-answer-form label{font-size:14px;font-weight:650}.text-answer-row{display:flex;gap:10px;align-items:stretch}.text-answer-row input{flex:1;min-width:0;width:100%;min-height:48px;border:1px solid #bac8da;border-radius:10px;padding:12px 14px;background:white;color:var(--ink);font:inherit;font-size:17px}.text-answer-row input:focus{outline:2px solid var(--select);outline-offset:2px}.text-answer-row .button{margin:0;flex-shrink:0}.text-answer-form.correct input{border-color:#66a879;background:#edf7ef}.text-answer-form.wrong input{border-color:#dc8186;background:#fff0f1}.text-answer-row input:disabled{opacity:1;-webkit-text-fill-color:var(--ink)}.text-answer-correct{overflow-wrap:anywhere}

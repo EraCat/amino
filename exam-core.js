@@ -33,7 +33,7 @@ var ExamCore = (() => {
   const TRAIT_GROUPS = [['thiol','thioether','selenol','alcohol','phenol'],['amide','carboxyl','amine','guanidine'],['phenol','benzyl','indole','imidazole','pyrrolidine'],['hydrogen','methyl','branched','twoCenters','achiral']];
   const categoryLabel = (a,key) => dictionary(a).axes[key]||dictionary(a).groups[key];
   const pair = a => a.three+' · '+a.code;
-  const imageStyles = (a,representation='mixed') => Object.keys(a.structureVariants||{}).filter(style=>style!=='side'&&(representation==='2d'?!style.startsWith('ball'):representation==='3d'?style.startsWith('ball'):true));
+  const imageStyles = a => Object.keys(a.structureVariants||{}).filter(style=>style!=='side');
   const imageFor = (a,style) => a.structureVariants?.[style]||a.structure;
   const pick = (values,random) => values[Math.floor(random()*values.length)];
   function nearby(a,b,type){
@@ -141,13 +141,13 @@ var ExamCore = (() => {
       .sort((x,y)=>y.weight-x.weight).map(item=>item.other);
     let alternatives=candidates.map(other=>({id:spec.id(other),label:spec.value(other)}));
     const imageQuestion=['structure','structure-reverse','structure-match','class-image','property-image'].includes(type);
-    const style=imageQuestion?pick(imageStyles(a,settings.representation),random):null;
+    const style=imageQuestion?pick(imageStyles(a),random):null;
     let prompt=spec.prompt(a),promptKind='text',choiceKind='text',note='';
     if(['structure','structure-match','class-image','property-image'].includes(type)){prompt=imageFor(a,style);promptKind='image';}
     if(['structure-reverse','structure-match'].includes(type)){
       // In a matching question, redraw the answer; never repeat the prompt asset.
-      const different=imageStyles(a,settings.representation).filter(s=>s!==style),flat=different.filter(s=>!s.startsWith('ball'));
-      const answerStyle=type==='structure-match'?pick(flat.length?flat:different,random):style;
+      const different=imageStyles(a).filter(s=>s!==style);
+      const answerStyle=type==='structure-match'?pick(different,random):style;
       correct.label=imageFor(a,answerStyle);alternatives=candidates.map(other=>({id:spec.id(other),label:imageFor(other,answerStyle)}));choiceKind='image';
     }
     if(imageQuestion)note=(style||'').startsWith('ball')?'model':'structure';

@@ -1042,22 +1042,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "label": {
-          "type": "string",
-          "minLength": 1
-        },
-        "mixed": {
-          "type": "string",
-          "minLength": 1
-        },
-        "2d": {
-          "type": "string",
-          "minLength": 1
-        },
-        "3d": {
-          "type": "string",
-          "minLength": 1
-        },
         "next": {
           "type": "string",
           "minLength": 1

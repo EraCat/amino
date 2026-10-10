@@ -266,10 +266,6 @@
     "historyUnavailable": "History unavailable"
   },
   "representations": {
-    "label": "Images",
-    "mixed": "2D and 3D",
-    "2d": "2D only",
-    "3d": "3D only",
     "next": "Another view",
     "modelNote": "Ball-and-stick model. Hydrogens are hidden; C is grey, N blue, O red, S yellow and Se orange.",
     "sidechainNote": "Only the side chain is shown. In proline it closes onto the nitrogen atom.",
